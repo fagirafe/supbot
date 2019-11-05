@@ -1,0 +1,18 @@
+@import "~variables.scss";
+
+#section-top {
+  display: flex;
+  flex-direction: column;
+  #logo {
+    text-align: center;
+    background-color: $color-red;
+    span {
+      font-family: "Futura Std Heavy Oblique";
+      font-size: 33px;
+      color: white;
+    }
+  }
+  #time {
+    padding-top: 15px;
+  }
+}

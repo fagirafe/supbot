@@ -1,7 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
+@import "~variables.scss";
+
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 0;
   padding: 0;
-
+  width: 100%;
   height: 100%;
+}
+
+@font-face {
+  font-family: "Courier New";
+  src: url("./assets/fonts/Courier New.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Courier New";
+  src: url("./assets/fonts/Courier New Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Futura Std Heavy Oblique";
+  src: url("./assets/fonts/Futura Std Heavy Oblique.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+span {
+  font-family: "Courier New";
+  font-size: 11px;
 }

@@ -1,0 +1,26 @@
+<div class="window-container">
+  <div class="tab-nav">
+    <a
+      routerLink="items"
+      class="tab-nav-item"
+      [class.active-tab-nav-item]="currentUrl == '/home/items'"
+    >
+      <span>EDIT / ITEMS</span>
+    </a>
+    <a
+      routerLink="profile"
+      class="tab-nav-item"
+      [class.active-tab-nav-item]="currentUrl == '/home/profile'"
+    >
+      <span>PROFILE</span>
+    </a>
+    <a
+      routerLink="confirmation"
+      class="tab-nav-item"
+      [class.active-tab-nav-item]="currentUrl == '/home/confirmation'"
+    >
+      <span>CONFIRMATION</span>
+    </a>
+  </div>
+  <router-outlet></router-outlet>
+</div>

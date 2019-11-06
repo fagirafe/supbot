@@ -3,6 +3,8 @@
 #section-top {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   #logo {
     text-align: center;
     background-color: $color-red;
@@ -10,9 +12,30 @@
       font-family: "Futura Std Heavy Oblique";
       font-size: 33px;
       color: white;
+      padding: 4px 8px;
     }
   }
   #time {
-    padding-top: 15px;
+    margin-top: 15px;
+    margin-bottom: 50px;
+  }
+}
+
+#main-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 14px;
+  .main-nav-item {
+    margin-right: 16px;
+    &:first-child {
+      margin-left: 8px;
+    }
+    &:hover {
+      background-color: $color-red;
+      color: white;
+      cursor: pointer;
+    }
   }
 }

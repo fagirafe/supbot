@@ -1,1 +1,2 @@
-export * from './page-not-found/page-not-found.component';
+export * from "./page-not-found/page-not-found.component";
+export * from "./sup-button/sup-button.component";

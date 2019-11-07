@@ -1,0 +1,30 @@
+@import "~variables.scss";
+
+button {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: "Courier New";
+  font-weight: bold;
+  font-size: 12px;
+  background-color: black;
+  outline: none;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.small {
+  padding: 5px 10px;
+}
+.large {
+  padding: 15px 32px;
+}
+.red {
+  background-color: $color-red;
+}
+.black {
+  background-color: black;
+}

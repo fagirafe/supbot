@@ -1,1 +1,16 @@
-<p>settings works!</p>
+<form [formGroup]="settingsForm">
+  <u>General</u>
+  <div class="setting">
+    <input type="checkbox" formControlName="testMode" />
+    <span>Test Mode</span>
+  </div>
+  <div class="setting">
+    <input type="text" formControlName="dropTime" />
+    <span>Drop Time</span>
+  </div>
+  <div class="setting">
+    <input type="text" formControlName="delay" />
+    <span class="input-label">ms</span>
+    <span>Delay</span>
+  </div>
+</form>

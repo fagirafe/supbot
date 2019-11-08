@@ -1,0 +1,32 @@
+@import "~variables.scss";
+u {
+  font-size: 12px;
+}
+
+.setting {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 8px 0;
+  input[type="text"] {
+    width: 100px;
+    height: 25px;
+    padding: 0 8px;
+    border: 1px solid $color-grey;
+    outline: none;
+    font-family: "Courier New";
+    font-size: 11px;
+  }
+  input[type="checkbox"] {
+    cursor: pointer;
+    outline: none;
+  }
+  span {
+    padding-left: 8px;
+  }
+  .input-label {
+    position: relative;
+    right: 30px;
+  }
+}

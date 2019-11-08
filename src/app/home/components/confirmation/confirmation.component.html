@@ -1,1 +1,37 @@
-<p>confirmation works!</p>
+<p id="confirmation-info">
+  Ready to start the bot! <br />
+  <br />
+  Profile: Custom <br />
+  Please check again that all your Items, Profile and Settings are correct!
+  <br />
+  <br />
+  It is prefered to start the bot about 2 minutes before the drop. A window
+  <br />
+  with recaptchas will open and you will have to constantly fill them out.
+</p>
+<div class="divider"></div>
+<div class="items">
+  <div class="item">
+    <div class="item-info">
+      <span class="item-name">Box Logo Hooded Sweatshirt</span>
+      <span class="item-style">Style: Grey</span>
+      <span class="item-size">Size: Medium</span>
+    </div>
+    <div class="item-actions">
+      <sup-button label="remove" color="black" size="small"></sup-button>
+    </div>
+  </div>
+</div>
+<form [formGroup]="confirmationForm">
+  <div id="price-limit-input">
+    <div class="sup-form-label">
+      <span>price limit</span>
+    </div>
+    <span class="input-currency">€</span>
+    <input class="small-input" type="text" formControlName="priceLimit" />
+  </div>
+</form>
+<div class="fit-space"></div>
+<div class="window-bottom-actions">
+  <sup-button label="start the bot" color="red" size="large"></sup-button>
+</div>

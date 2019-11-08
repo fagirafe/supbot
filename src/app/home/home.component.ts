@@ -7,7 +7,7 @@ import { Router, Event, NavigationEnd } from "@angular/router";
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-  public currentUrl = "/home/items";
+  public currentUrl: string = "/home/items";
 
   constructor(private router: Router) {
     this.router.events.subscribe((event: Event) => {

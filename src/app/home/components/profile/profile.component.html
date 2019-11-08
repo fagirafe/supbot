@@ -1,16 +1,153 @@
 <div class="content-half-container">
-  <div class="content-half">
-    <div class="content-heading-bar">
-      <span>billing/shipping information</span>
+  <form [formGroup]="profileForm">
+    <div class="content-half">
+      <div class="content-heading-bar">
+        <span>billing/shipping information</span>
+      </div>
+      <div class="sup-select" *ngIf="!isNewProfile">
+        <div class="sup-form-label">
+          <span>profile</span>
+        </div>
+        <select formControlName="profileName">
+          <option value="test">Test</option>
+        </select>
+        <button class="sup-form-switch-button" (click)="toggleProfileType()">
+          new
+        </button>
+      </div>
+      <div class="sup-input" *ngIf="isNewProfile">
+        <div class="sup-form-label">
+          <span>profile name</span>
+        </div>
+        <input type="text" formControlName="profileName" />
+        <button class="sup-form-switch-button" (click)="toggleProfileType()">
+          select
+        </button>
+      </div>
+      <span class="form-info"
+        >must be the same as your credit card address</span
+      >
+      <div class="sup-input">
+        <div class="sup-form-label">
+          <span>full name</span>
+        </div>
+        <input type="text" formControlName="fullName" />
+      </div>
+      <div class="sup-input">
+        <div class="sup-form-label">
+          <span>email</span>
+        </div>
+        <input type="text" formControlName="email" />
+      </div>
+      <div class="sup-input">
+        <div class="sup-form-label">
+          <span>tel</span>
+        </div>
+        <input type="text" formControlName="tel" />
+      </div>
+      <div class="sup-input">
+        <div class="sup-form-label">
+          <span>address</span>
+        </div>
+        <input type="text" formControlName="address" />
+      </div>
+      <div class="sup-input">
+        <div class="sup-form-label">
+          <span>city</span>
+        </div>
+        <input type="text" formControlName="city" />
+      </div>
+      <div class="sup-input">
+        <div class="sup-form-label">
+          <span>zip</span>
+        </div>
+        <input class="small-input" type="text" formControlName="zip" />
+      </div>
+      <div class="sup-select">
+        <div class="sup-form-label">
+          <span>country</span>
+        </div>
+        <select formControlName="country">
+          <option value="DE">Germany</option>
+          <option value="AT">Austria</option>
+        </select>
+      </div>
     </div>
-  </div>
-  <div class="content-half">
-    <div class="content-heading-bar">
-      <span>credit card information</span>
+    <div class="content-half">
+      <div class="content-heading-bar">
+        <span>credit card information</span>
+      </div>
+      <div class="sup-select">
+        <div class="sup-form-label">
+          <span>type</span>
+        </div>
+        <select formControlName="type">
+          <option value="master">Mastercard</option>
+          <option value="visa">Visa</option>
+        </select>
+      </div>
+      <div class="sup-input">
+        <div class="sup-form-label">
+          <span>card number</span>
+        </div>
+        <input type="text" formControlName="cardNumber" />
+      </div>
+      <div class="sup-select">
+        <div class="sup-form-label">
+          <span>exp. date</span>
+        </div>
+        <select formControlName="expMonth">
+          <option value="01">01</option>
+          <option value="02">02</option>
+          <option value="03">03</option>
+          <option value="04">04</option>
+          <option value="05">05</option>
+          <option value="06">06</option>
+          <option value="07">07</option>
+          <option value="08">08</option>
+          <option value="09">09</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
+        <select formControlName="expYear">
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+          <option value="2028">2028</option>
+          <option value="2029">2029</option>
+        </select>
+      </div>
+      <div class="sup-input">
+        <div class="sup-form-label">
+          <span>CVV</span>
+        </div>
+        <input class="small-input" type="text" formControlName="CVV" />
+      </div>
+      <div id="terms">
+        <input type="checkbox" formControlName="terms" />
+        <p>
+          I have read and aggree to the
+          <a href="">terms & conditions</a>, and accept the
+          <a href="">return policy</a>
+        </p>
+      </div>
     </div>
-  </div>
+  </form>
 </div>
 <div class="window-bottom-actions">
+  <sup-button
+    label="delete"
+    color="black"
+    size="large"
+    class="button-padding"
+  ></sup-button>
   <sup-button
     label="save"
     color="black"

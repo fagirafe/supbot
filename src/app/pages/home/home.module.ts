@@ -7,7 +7,7 @@ import { HomeComponent } from "./home.component";
 import { ItemsComponent } from "./components/items/items.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { ConfirmationComponent } from "./components/confirmation/confirmation.component";
-import { SharedModule } from "../shared/shared.module";
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   declarations: [

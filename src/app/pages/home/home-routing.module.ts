@@ -8,7 +8,7 @@ import { ConfirmationComponent } from "./components/confirmation/confirmation.co
 
 const routes: Routes = [
   {
-    path: "home",
+    path: "",
     component: HomeComponent,
     children: [
       {

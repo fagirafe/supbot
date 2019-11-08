@@ -21,6 +21,15 @@
   }
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 800px;
+  height: 520px;
+}
+
 #main-nav {
   display: flex;
   flex-direction: row;
@@ -28,6 +37,8 @@
   align-items: center;
   margin-top: 14px;
   .main-nav-item {
+    text-decoration: none;
+    color: black;
     margin-right: 16px;
     &:first-child {
       margin-left: 8px;

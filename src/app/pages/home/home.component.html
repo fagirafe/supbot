@@ -3,7 +3,9 @@
     <a
       routerLink="items"
       class="tab-nav-item"
-      [class.active-tab-nav-item]="currentUrl == ('/home/items' || '/home')"
+      [class.active-tab-nav-item]="
+        currentUrl == '/home/items' || currentUrl == '/home'
+      "
     >
       <span>EDIT / ITEMS</span>
     </a>

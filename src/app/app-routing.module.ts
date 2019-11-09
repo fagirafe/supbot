@@ -4,29 +4,34 @@ import { PageNotFoundComponent } from "./shared/components";
 
 const routes: Routes = [
   {
-    path: "",
-    redirectTo: "home",
-    pathMatch: "full"
-  },
-  {
     path: "home",
-    loadChildren: "./pages/home/home.module#HomeModule"
+    loadChildren: () =>
+      import("./pages/home/home.module").then(m => m.HomeModule)
   },
   {
     path: "history",
-    loadChildren: "./pages/history/history.module#HistoryModule"
+    loadChildren: () =>
+      import("./pages/history/history.module").then(m => m.HistoryModule)
   },
   {
     path: "settings",
-    loadChildren: "./pages/settings/settings.module#SettingsModule"
+    loadChildren: () =>
+      import("./pages/settings/settings.module").then(m => m.SettingsModule)
   },
   {
     path: "news",
-    loadChildren: "./pages/news/news.module#NewsModule"
+    loadChildren: () =>
+      import("./pages/news/news.module").then(m => m.NewsModule)
   },
   {
     path: "about",
-    loadChildren: "./pages/about/about.module#AboutModule"
+    loadChildren: () =>
+      import("./pages/about/about.module").then(m => m.AboutModule)
+  },
+  {
+    path: "",
+    redirectTo: "home",
+    pathMatch: "full"
   },
   {
     path: "**",

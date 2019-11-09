@@ -55,6 +55,7 @@
     "@types/jasminewd2": "2.0.6",
     "@types/mocha": "5.2.7",
     "@types/node": "12.6.8",
+    "acorn": "^7.1.0",
     "chai": "4.2.0",
     "codelyzer": "5.1.0",
     "conventional-changelog-cli": "2.0.25",

@@ -1,0 +1,14 @@
+@import "~styles/global/variables";
+
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+.window-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 8px 0;
+}

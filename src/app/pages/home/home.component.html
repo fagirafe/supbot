@@ -4,10 +4,12 @@
       routerLink="items"
       class="tab-nav-item"
       [class.active-tab-nav-item]="
-        currentUrl == '/home/items' || currentUrl == '/home'
+        currentUrl == '/home/items' ||
+        currentUrl == '/home' ||
+        currentUrl == '/'
       "
     >
-      <span>EDIT / ITEMS</span>
+      <span>EDIT / VIEW ITEMS</span>
     </a>
     <a
       routerLink="profile"

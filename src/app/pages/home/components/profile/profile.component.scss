@@ -1,4 +1,4 @@
-@import "~variables.scss";
+@import "~styles/global/variables";
 
 :host {
   display: flex;
@@ -38,57 +38,6 @@
   }
 }
 
-.sup-input {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  padding: 4px 8px;
-  input {
-    flex: 1 1 auto;
-    padding: 3px 8px;
-    outline: none;
-    font-family: "Courier New";
-    font-size: 11px;
-    border: 1px solid $color-grey;
-  }
-  .small-input {
-    flex: none;
-    width: 75px;
-  }
-}
-
-.sup-select {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  padding: 4px 8px;
-  select {
-    width: 100px;
-    padding: 3px 8px;
-    outline: none;
-    font-family: "Courier New";
-    font-size: 11px;
-    border: 1px solid $color-grey;
-    margin-right: 8px;
-  }
-}
-
-.sup-form-label {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100px;
-  height: 25px;
-  background-color: $color-grey;
-  margin-right: 8px;
-  span {
-    font-weight: bold;
-    color: $color-dark-grey;
-    padding-left: 8px;
-  }
-}
-
 .sup-form-switch-button {
   margin-left: 8px;
   font-family: "Courier New";
@@ -97,11 +46,6 @@
   &:hover {
     cursor: pointer;
   }
-}
-
-.form-info {
-  margin: 8px 0;
-  padding: 0 8px;
 }
 
 #terms {

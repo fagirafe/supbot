@@ -1,4 +1,4 @@
-@import "~variables.scss";
+@import "~styles/global/variables";
 
 :host {
   width: 100%;
@@ -18,7 +18,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    flex: 1 1 auto;
+    width: 33.3%;
     height: 100%;
     border-right: 1px dotted $color-light-grey;
     text-decoration: none;

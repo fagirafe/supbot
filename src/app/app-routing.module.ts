@@ -29,6 +29,11 @@ const routes: Routes = [
       import("./pages/about/about.module").then(m => m.AboutModule)
   },
   {
+    path: "add-item",
+    loadChildren: () =>
+      import("./pages/add-item/add-item.module").then(m => m.AddItemModule)
+  },
+  {
     path: "",
     redirectTo: "home",
     pathMatch: "full"

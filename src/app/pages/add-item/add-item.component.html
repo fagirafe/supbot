@@ -1,0 +1,78 @@
+<div class="window-container">
+  <div class="window-heading">
+    <span>ITEM CONFIGURATION</span>
+  </div>
+  <div class="window-content">
+    <form [formGroup]="itemForm">
+      <div class="sup-select">
+        <div class="sup-form-label">
+          <span>category</span>
+        </div>
+        <select formControlName="category">
+          <option value="new">New</option>
+          <option value="jackets">Jackets</option>
+          <option value="shirts">Shirts</option>
+          <option value="tops/sweaters">Tops/Sweaters</option>
+          <option value="sweatshirts">Sweatshirts</option>
+          <option value="pants">Pants</option>
+          <option value="hats">Hats</option>
+          <option value="bags">Bags</option>
+          <option value="accessories">Accessories</option>
+          <option value="shoes">Shoes</option>
+          <option value="skate">Skate</option>
+        </select>
+      </div>
+      <div class="sup-input">
+        <div class="sup-form-label">
+          <span>keywords</span>
+        </div>
+        <input type="text" formControlName="keywords" />
+      </div>
+      <div class="sup-input">
+        <div class="sup-form-label">
+          <span>style</span>
+        </div>
+        <input type="text" formControlName="style" />
+      </div>
+      <div class="sup-select">
+        <div class="sup-form-label">
+          <span>size</span>
+        </div>
+        <select formControlName="size">
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+          <option value="xlarge">XLarge</option>
+        </select>
+      </div>
+      <span class="form-info">alternative style and size</span>
+      <div class="sup-input">
+        <div class="sup-form-label">
+          <span>style</span>
+        </div>
+        <input type="text" formControlName="styleAlternative" />
+      </div>
+      <div class="sup-select">
+        <div class="sup-form-label">
+          <span>size</span>
+        </div>
+        <select formControlName="sizeAlternative">
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+          <option value="xlarge">XLarge</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="window-bottom-actions">
+    <sup-button
+      label="cancel"
+      color="black"
+      size="large"
+      routerLink="/home/items"
+      class="button-padding"
+    ></sup-button>
+    <sup-button label="save/add item" color="red" size="large"></sup-button>
+  </div>
+</div>

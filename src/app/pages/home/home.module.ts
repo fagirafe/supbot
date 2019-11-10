@@ -9,6 +9,9 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { ConfirmationComponent } from "./components/confirmation/confirmation.component";
 import { SharedModule } from "../../shared/shared.module";
 
+import { StoreModule } from "@ngrx/store";
+import { itemReducer } from "./components/items/item.reducer";
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -16,6 +19,11 @@ import { SharedModule } from "../../shared/shared.module";
     ProfileComponent,
     ConfirmationComponent
   ],
-  imports: [CommonModule, SharedModule, HomeRoutingModule]
+  imports: [
+    CommonModule,
+    SharedModule,
+    HomeRoutingModule,
+    StoreModule.forFeature("item", itemReducer)
+  ]
 })
 export class HomeModule {}

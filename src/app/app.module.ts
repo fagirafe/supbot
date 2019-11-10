@@ -22,6 +22,10 @@ import { SettingsModule } from "./pages/settings/settings.module";
 import { NewsModule } from "./pages/news/news.module";
 import { AboutModule } from "./pages/about/about.module";
 
+import { StoreModule } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { reducers } from "./reducers";
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -42,6 +46,10 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
+    }),
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
     })
   ],
   providers: [],

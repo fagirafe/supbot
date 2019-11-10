@@ -83,5 +83,10 @@
   },
   "engines": {
     "node": ">=10.9.0"
+  },
+  "dependencies": {
+    "@ngrx/entity": "^8.5.0",
+    "@ngrx/store": "^8.5.0",
+    "@ngrx/store-devtools": "^8.5.0"
   }
 }

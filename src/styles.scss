@@ -131,6 +131,9 @@ u {
     font-size: 11px;
     border: 1px solid $color-grey;
     margin-right: 8px;
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 

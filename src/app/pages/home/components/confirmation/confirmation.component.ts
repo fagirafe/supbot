@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-confirmation",
@@ -7,13 +6,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
   styleUrls: ["./confirmation.component.scss"]
 })
 export class ConfirmationComponent implements OnInit {
-  confirmationForm: FormGroup;
+  constructor() {}
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit() {
-    this.confirmationForm = this.fb.group({
-      priceLimit: ["", []]
-    });
-  }
+  ngOnInit() {}
 }

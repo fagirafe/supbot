@@ -8,13 +8,15 @@ import { WebviewDirective } from "./directives/";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SupButtonComponent } from "./components/sup-button/sup-button.component";
 import { FirstLetterUpperPipe } from "./pipes/first-letter-upper.pipe";
+import { ItemsListComponent } from "./components/items-list/items-list.component";
 
 @NgModule({
   declarations: [
     PageNotFoundComponent,
     WebviewDirective,
     SupButtonComponent,
-    FirstLetterUpperPipe
+    FirstLetterUpperPipe,
+    ItemsListComponent
   ],
   imports: [CommonModule, TranslateModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -23,7 +25,8 @@ import { FirstLetterUpperPipe } from "./pipes/first-letter-upper.pipe";
     FormsModule,
     ReactiveFormsModule,
     SupButtonComponent,
-    FirstLetterUpperPipe
+    FirstLetterUpperPipe,
+    ItemsListComponent
   ]
 })
 export class SharedModule {}

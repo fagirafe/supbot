@@ -1,8 +1,4 @@
-import { Component, OnInit } from "@angular/core";
-import * as actions from "./item.actions";
-import * as fromItem from "./item.reducer";
-import { Observable } from "rxjs";
-import { Store } from "@ngrx/store";
+import { Component, OnInit, ViewChild } from "@angular/core";
 
 @Component({
   selector: "app-items",
@@ -10,15 +6,13 @@ import { Store } from "@ngrx/store";
   styleUrls: ["./items.component.scss"]
 })
 export class ItemsComponent implements OnInit {
-  items$: Observable<any>;
+  itemsCount = 0;
 
-  constructor(private store: Store<fromItem.State>) {}
+  constructor() {}
 
-  ngOnInit() {
-    this.items$ = this.store.select(fromItem.selectAll);
-  }
+  ngOnInit() {}
 
-  removeItem(id: string) {
-    this.store.dispatch(new actions.Remove(id));
+  itemsCountChangedHandler(count: number) {
+    this.itemsCount = count;
   }
 }

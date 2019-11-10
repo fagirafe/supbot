@@ -1,0 +1,30 @@
+@import "~styles/global/variables";
+
+.items {
+  flex: 1;
+  .item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px dotted $color-grey;
+    .item-info {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      flex: 1 1 auto;
+      span {
+        margin: 2px 0;
+      }
+    }
+    .item-actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 0 10px;
+    }
+  }
+}

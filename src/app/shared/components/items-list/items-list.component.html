@@ -1,0 +1,27 @@
+<div class="items">
+  <div class="item" *ngFor="let item of items$ | async">
+    <div class="item-info">
+      <span class="item-name">{{ item.keywords }}</span>
+      <span class="item-style">
+        Style: {{ item.style }}
+        <span *ngIf="item.styleAlternative"
+          >| {{ item.styleAlternative }}</span
+        ></span
+      >
+      <span class="item-size"
+        >Size: {{ item.size | firstLetterUpper }}
+        <span *ngIf="item.sizeAlternative"
+          >| {{ item.sizeAlternative | firstLetterUpper }}</span
+        ></span
+      >
+    </div>
+    <div class="item-actions">
+      <sup-button
+        label="remove"
+        color="black"
+        size="small"
+        (click)="removeItem(item.id)"
+      ></sup-button>
+    </div>
+  </div>
+</div>

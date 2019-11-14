@@ -5,6 +5,7 @@ import * as fromItem from "../home/components/items/item.reducer";
 import { Store } from "@ngrx/store";
 import { Item } from "../../shared/models/item";
 import { Router } from "@angular/router";
+import { v4 as uuid } from "uuid";
 
 @Component({
   selector: "app-add-item",
@@ -33,7 +34,7 @@ export class AddItemComponent implements OnInit {
 
   addItem() {
     const item: Item = {
-      id: new Date().getUTCMilliseconds().toString(),
+      id: uuid(),
       ...this.itemForm.value
     };
     this.store.dispatch(new actions.Add(item));

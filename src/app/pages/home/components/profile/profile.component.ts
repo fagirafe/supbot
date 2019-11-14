@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { AppState } from "../../../../shared/models/app-state";
+import { Store } from "@ngrx/store";
+import * as actions from "./profile.actions";
 
 @Component({
   selector: "app-profile",
@@ -10,7 +13,7 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   isNewProfile: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private store: Store<AppState>) {}
 
   ngOnInit() {
     this.profileForm = this.fb.group({
@@ -35,5 +38,12 @@ export class ProfileComponent implements OnInit {
     let profileNameFormControl = this.profileForm.get("profileName");
     profileNameFormControl.reset();
     this.isNewProfile = !this.isNewProfile;
+  }
+
+  setProfile() {
+    this.store.dispatch(new actions.Set(this.profileForm.value));
+  }
+  clearProfile() {
+    this.store.dispatch(new actions.Clear());
   }
 }

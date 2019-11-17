@@ -23,7 +23,7 @@ import { itemReducer } from "./components/items/item.reducer";
     CommonModule,
     SharedModule,
     HomeRoutingModule,
-    StoreModule.forFeature("item", itemReducer)
+    StoreModule.forFeature("items", itemReducer)
   ]
 })
 export class HomeModule {}

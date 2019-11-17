@@ -1,5 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { AppState } from "../../shared/models/app-state";
+import { Store } from "@ngrx/store";
+import { debounceTime } from "rxjs/operators";
+import * as actions from "./settings.actions";
 
 @Component({
   selector: "app-settings",
@@ -9,7 +13,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private store: Store<AppState>) {}
 
   ngOnInit() {
     this.settingsForm = this.fb.group({
@@ -17,6 +21,13 @@ export class SettingsComponent implements OnInit {
       dropTime: ["12:00:00", [Validators.required]],
       delay: ["3000", [Validators.required]],
       priceLimit: ["", []]
+    });
+    this.onChanges();
+  }
+
+  onChanges() {
+    this.settingsForm.valueChanges.pipe(debounceTime(300)).subscribe(val => {
+      this.store.dispatch(new actions.Set(this.settingsForm.value));
     });
   }
 }

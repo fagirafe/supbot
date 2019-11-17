@@ -4,7 +4,7 @@ import { profileReducer } from "../pages/home/components/profile/profile.reducer
 import { settingsReducer } from "../pages/settings/settings.reducer";
 
 export const reducers: ActionReducerMap<any> = {
-  item: itemReducer,
+  items: itemReducer,
   profile: profileReducer,
   settings: settingsReducer
 };

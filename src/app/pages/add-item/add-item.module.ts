@@ -13,7 +13,7 @@ import { StoreModule } from "@ngrx/store";
     CommonModule,
     AddItemRoutingModule,
     SharedModule,
-    StoreModule.forFeature("item", itemReducer)
+    StoreModule.forFeature("items", itemReducer)
   ]
 })
 export class AddItemModule {}

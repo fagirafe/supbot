@@ -27,7 +27,7 @@ export function itemReducer(
   }
 }
 
-export const getItemState = createFeatureSelector<State>("item");
+export const getItemState = createFeatureSelector<State>("items");
 
 export const {
   selectIds,

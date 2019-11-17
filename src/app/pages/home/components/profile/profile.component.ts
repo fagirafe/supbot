@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AppState } from "../../../../shared/models/app-state";
 import { Store } from "@ngrx/store";
 import * as actions from "./profile.actions";
+import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: "app-profile",
@@ -32,6 +33,7 @@ export class ProfileComponent implements OnInit {
       CVV: ["", [Validators.required]],
       terms: [false, [Validators.requiredTrue]]
     });
+    this.onChanges();
   }
 
   toggleProfileType() {
@@ -43,7 +45,14 @@ export class ProfileComponent implements OnInit {
   setProfile() {
     this.store.dispatch(new actions.Set(this.profileForm.value));
   }
+
   clearProfile() {
     this.store.dispatch(new actions.Clear());
+  }
+
+  onChanges() {
+    this.profileForm.valueChanges.pipe(debounceTime(300)).subscribe(val => {
+      this.store.dispatch(new actions.Set(this.profileForm.value));
+    });
   }
 }

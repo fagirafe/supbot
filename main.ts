@@ -23,7 +23,7 @@ function createWindow() {
 
   if (serve) {
     require("electron-reload")(__dirname, {
-      electron: require(`${__dirname}/node_modules/electron`)
+      electron: require(`${__dirname}/../node_modules/electron`)
     });
     win.loadURL("http://localhost:4200");
   } else {
@@ -78,5 +78,6 @@ try {
 
 ipcMain.on("test", (event, arg) => {
   console.log(arg);
+  test();
   // event.reply('asynchronous-reply', 'pong')
 });

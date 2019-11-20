@@ -13,10 +13,10 @@ import * as actions from "./settings.actions";
 export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private store: Store<AppState>) {}
+  constructor(private _fb: FormBuilder, private _store: Store<AppState>) {}
 
   ngOnInit() {
-    this.settingsForm = this.fb.group({
+    this.settingsForm = this._fb.group({
       testMode: [false, []],
       dropTime: ["12:00:00", [Validators.required]],
       delay: ["3000", [Validators.required]],
@@ -27,7 +27,7 @@ export class SettingsComponent implements OnInit {
 
   onChanges() {
     this.settingsForm.valueChanges.pipe(debounceTime(300)).subscribe(val => {
-      this.store.dispatch(new actions.Set(this.settingsForm.value));
+      this._store.dispatch(new actions.Set(this.settingsForm.value));
     });
   }
 }

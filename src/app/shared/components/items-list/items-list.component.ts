@@ -21,10 +21,10 @@ export class ItemsListComponent implements OnInit, OnDestroy {
 
   itemsSubscription: Subscription;
 
-  constructor(private store: Store<fromItem.State>) {}
+  constructor(private _store: Store<fromItem.State>) {}
 
   ngOnInit() {
-    this.items$ = this.store.select(fromItem.selectAll);
+    this.items$ = this._store.select(fromItem.selectAll);
     this.itemsSubscription = this.items$.subscribe(items => {
       this.itemsCountChanged.emit(items.length);
     });
@@ -35,6 +35,6 @@ export class ItemsListComponent implements OnInit, OnDestroy {
   }
 
   removeItem(id: string) {
-    this.store.dispatch(new actions.Remove(id));
+    this._store.dispatch(new actions.Remove(id));
   }
 }

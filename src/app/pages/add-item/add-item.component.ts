@@ -16,13 +16,13 @@ export class AddItemComponent implements OnInit {
   itemForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
-    private store: Store<fromItem.State>,
-    private router: Router
+    private _fb: FormBuilder,
+    private _store: Store<fromItem.State>,
+    private _router: Router
   ) {}
 
   ngOnInit() {
-    this.itemForm = this.fb.group({
+    this.itemForm = this._fb.group({
       category: ["new", [Validators.required]],
       keywords: ["", [Validators.required]],
       style: ["", [Validators.required]],
@@ -37,7 +37,7 @@ export class AddItemComponent implements OnInit {
       id: uuid(),
       ...this.itemForm.value
     };
-    this.store.dispatch(new actions.Add(item));
-    this.router.navigateByUrl("/home/items");
+    this._store.dispatch(new actions.Add(item));
+    this._router.navigateByUrl("/home/items");
   }
 }

@@ -14,10 +14,10 @@ export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   isNewProfile: boolean = false;
 
-  constructor(private fb: FormBuilder, private store: Store<AppState>) {}
+  constructor(private _fb: FormBuilder, private _store: Store<AppState>) {}
 
   ngOnInit() {
-    this.profileForm = this.fb.group({
+    this.profileForm = this._fb.group({
       profileName: ["", [Validators.required]],
       fullName: ["", [Validators.required]],
       email: ["", [Validators.required, Validators.email]],
@@ -43,16 +43,16 @@ export class ProfileComponent implements OnInit {
   }
 
   setProfile() {
-    this.store.dispatch(new actions.Set(this.profileForm.value));
+    this._store.dispatch(new actions.Set(this.profileForm.value));
   }
 
   clearProfile() {
-    this.store.dispatch(new actions.Clear());
+    this._store.dispatch(new actions.Clear());
   }
 
   onChanges() {
     this.profileForm.valueChanges.pipe(debounceTime(300)).subscribe(val => {
-      this.store.dispatch(new actions.Set(this.profileForm.value));
+      this._store.dispatch(new actions.Set(this.profileForm.value));
     });
   }
 }

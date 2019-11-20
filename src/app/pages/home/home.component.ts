@@ -9,8 +9,8 @@ import { Router, Event, NavigationEnd } from "@angular/router";
 export class HomeComponent implements OnInit {
   public currentUrl: string = "/home/items";
 
-  constructor(private router: Router) {
-    this.router.events.subscribe((event: Event) => {
+  constructor(private _router: Router) {
+    this._router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.currentUrl = event.url;
       }

@@ -16,14 +16,14 @@ export class ConfirmationComponent implements OnInit {
   settings$: Observable<any>;
 
   constructor(
-    private electronService: ElectronService,
-    private store: Store<AppState>
+    private _electronService: ElectronService,
+    private _store: Store<AppState>
   ) {}
 
   ngOnInit() {
-    this.items$ = this.store.select("items");
-    this.profile$ = this.store.select("profile");
-    this.settings$ = this.store.select("settings");
+    this.items$ = this._store.select("items");
+    this.profile$ = this._store.select("profile");
+    this.settings$ = this._store.select("settings");
   }
 
   async test() {
@@ -33,7 +33,7 @@ export class ConfirmationComponent implements OnInit {
       settings: await this.getValue(this.settings$)
     };
     console.log(stateObj);
-    this.electronService.ipcRenderer.send("test", stateObj);
+    this._electronService.ipcRenderer.send("test", stateObj);
   }
 
   getValue(observable: Observable<any>): Promise<any> {

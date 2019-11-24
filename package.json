@@ -34,7 +34,9 @@
     "test": "ng test",
     "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts",
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "main": "tsc -p tsconfig-main.json && node ./dist/main/index.js",
+    "main-dev": "cross-env TS_NODE_PROJECT='./tsconfig-main.json' ts-node-dev  --inspect --respawn ./main/ main/index.ts"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "8.2.0",
@@ -55,11 +57,14 @@
     "@types/jasminewd2": "2.0.6",
     "@types/mocha": "5.2.7",
     "@types/node": "12.6.8",
+    "@types/puppeteer": "^2.0.0",
+    "@types/request": "^2.48.3",
     "acorn": "^7.1.0",
     "chai": "4.2.0",
     "codelyzer": "5.1.0",
     "conventional-changelog-cli": "2.0.25",
     "core-js": "3.1.4",
+    "cross-env": "^6.0.3",
     "electron": "7.0.0",
     "electron-builder": "21.2.0",
     "electron-reload": "1.5.0",
@@ -89,6 +94,8 @@
   "dependencies": {
     "@ngrx/entity": "^8.5.0",
     "@ngrx/store": "^8.5.0",
-    "@ngrx/store-devtools": "^8.5.0"
+    "@ngrx/store-devtools": "^8.5.0",
+    "puppeteer": "^2.0.0",
+    "request": "^2.88.0"
   }
 }

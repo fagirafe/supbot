@@ -1,6 +1,7 @@
 import { app, BrowserWindow, screen, ipcMain } from "electron";
 import * as path from "path";
 import * as url from "url";
+import { Bot } from "./main/index";
 
 let win, serve;
 const args = process.argv.slice(1);
@@ -78,6 +79,5 @@ try {
 
 ipcMain.on("test", (event, arg) => {
   console.log(arg);
-  test();
   // event.reply('asynchronous-reply', 'pong')
 });

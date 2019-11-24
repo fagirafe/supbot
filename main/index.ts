@@ -38,16 +38,19 @@ const testSettings: Settings = {
   priceLimit: 0
 };
 
-async function cop(supreme: Supreme, runtimeTimer: Utility.RuntimeTimer) {
+async function cop(
+  supreme: Supreme,
+  runtimeTimer: Utility.RuntimeTimer,
+  product: Product,
+  profile: Profile,
+  settings: Settings
+) {
   try {
-    let stock = await supreme.getMobileStock();
-    let productToCop: object = await supreme.searchProductByKeywords(
-      testProduct
-    );
+    let productToCop: object = await supreme.searchProductByKeywords(product);
     console.log(productToCop);
     let productState: ProductState = await supreme.getProductState(
       productToCop["id"],
-      testProduct
+      product
     );
     console.log(productState);
     if (
@@ -60,25 +63,35 @@ async function cop(supreme: Supreme, runtimeTimer: Utility.RuntimeTimer) {
     runtimeTimer.start();
     await supreme.addProductToCart(productState);
     try {
-      await supreme.checkout(testProfile, testSettings, runtimeTimer);
+      await supreme.checkout(profile, settings, runtimeTimer);
     } catch (err) {
       console.log(err);
     }
   } catch (err) {
     setTimeout(() => {
       console.log(err);
-      cop(supreme, runtimeTimer);
+      cop(supreme, runtimeTimer, product, profile, settings);
     }, 200);
   }
 }
 
-(async () => {
-  const supreme = new Supreme();
-  let runtimeTimer = new Utility.RuntimeTimer();
-  await supreme.init();
-  await cop(supreme, runtimeTimer);
-})();
+// (async () => {
+//   const supreme = new Supreme();
+//   let runtimeTimer = new Utility.RuntimeTimer();
+//   await supreme.init();
+//   await cop(supreme, runtimeTimer);
+// })();
 
 export namespace Bot {
-  export async function start(): Promise<void> {}
+  export async function start(
+    product: Product,
+    profile: Profile,
+    settings: Settings
+  ): Promise<void> {
+    console.log(product, profile, settings);
+    const supreme = new Supreme();
+    let runtimeTimer = new Utility.RuntimeTimer();
+    await supreme.init();
+    await cop(supreme, runtimeTimer, product, profile, settings);
+  }
 }

@@ -1,4 +1,5 @@
 export interface Product {
+  id?: string;
   category: string;
   keywords: string;
   style: string;

@@ -19,8 +19,8 @@ export class SettingsComponent implements OnInit {
     this.settingsForm = this._fb.group({
       testMode: [false, []],
       dropTime: ["12:00:00", [Validators.required]],
-      delay: ["3000", [Validators.required]],
-      priceLimit: ["", []]
+      delay: [3000, [Validators.required]],
+      priceLimit: [0, []]
     });
     this.onChanges();
   }

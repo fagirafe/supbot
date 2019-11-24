@@ -4,8 +4,8 @@ import { Settings } from "../../shared/models/settings";
 const defaultSettings: Settings = {
   testMode: false,
   dropTime: "12:00:00",
-  delay: "3000",
-  priceLimit: ""
+  delay: 3000,
+  priceLimit: 0
 };
 
 export function settingsReducer(

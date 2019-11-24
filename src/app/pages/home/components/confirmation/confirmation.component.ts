@@ -33,7 +33,7 @@ export class ConfirmationComponent implements OnInit {
       settings: await this.getValue(this.settings$)
     };
     console.log(stateObj);
-    this._electronService.ipcRenderer.send("test", stateObj);
+    this._electronService.ipcRenderer.send("start", stateObj);
   }
 
   getValue(observable: Observable<any>): Promise<any> {

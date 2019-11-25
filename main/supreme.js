@@ -358,11 +358,14 @@ var Supreme = /** @class */ (function (_super) {
             var recaptchaResponseToken, err_1, totalString, total;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.page.goto(this.baseUrl + "/mobile#checkout", {
-                            waitUntil: "networkidle2"
-                        })];
+                    case 0:
+                        console.log("Hallo");
+                        return [4 /*yield*/, this.page.goto(this.baseUrl + "/mobile#checkout", {
+                                waitUntil: "networkidle2"
+                            })];
                     case 1:
                         _a.sent();
+                        console.log("Test");
                         _a.label = 2;
                     case 2:
                         _a.trys.push([2, 4, , 5]);

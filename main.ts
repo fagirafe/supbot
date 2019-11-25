@@ -1,21 +1,25 @@
-import { app, BrowserWindow, screen, ipcMain } from "electron";
 import * as path from "path";
-import * as url from "url";
-import { Bot } from "./main/index";
-
-import pie from "puppeteer-in-electron";
 import * as puppeteer from "puppeteer-core";
+import * as url from "url";
+
+import { BrowserWindow, app, ipcMain, screen } from "electron";
+
+import { Bot } from "./main/index";
 import { PupBrowser } from "./main/pup_browser";
+import { async } from "@angular/core/testing";
+import pie from "puppeteer-in-electron";
 
 if (!app.requestSingleInstanceLock()) {
   app.quit();
 }
 
-let win, serve, pieBrowser;
+let win: BrowserWindow, serve: boolean, pieBrowser: puppeteer.Browser;
 const args = process.argv.slice(1);
 serve = args.some(val => val === "--serve");
 
-createPieBrowser();
+(async () => {
+  pieBrowser = await pie.connect(app, puppeteer, 3002);
+})();
 
 function createWindow() {
   const electronScreen = screen;
@@ -96,24 +100,25 @@ ipcMain.on("test", (event, arg) => {
 
 ipcMain.on("start", async (event, arg) => {
   console.log(arg);
-  let pupBrowser = new PupBrowser(
+  await Bot.start(
     pieBrowser,
-    "https://www.supremenewyork.com/"
+    arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]] !=
+      undefined
+      ? arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]]
+      : {},
+    arg["profile"],
+    arg["settings"]
   );
-  await pupBrowser.init();
-  // await Bot.start(
-  //   arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]] !=
-  //     undefined
-  //     ? arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]]
-  //     : {},
-  //   arg["profile"],
-  //   arg["settings"]
-  // );
 });
 
-async function createPieBrowser() {
-  pieBrowser = await pie.connect(app, puppeteer, 3002);
-}
+ipcMain.on("prepare", async (event, arg) => {
+  console.log("Preparing...");
+});
+
+ipcMain.handle("cancel", async (event, arg) => {
+  console.log("Canceling...");
+  return;
+});
 
 // async function createPieBrowser() {
 //   let browser = await pie.connect(app, puppeteer, 3002);

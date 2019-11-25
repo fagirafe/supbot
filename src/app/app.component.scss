@@ -8,11 +8,15 @@
   #logo {
     text-align: center;
     background-color: $color-red;
+    outline: none;
     span {
       font-family: "Futura Std Heavy Oblique";
       font-size: 33px;
       color: white;
       padding: 4px 8px;
+    }
+    &:hover {
+      cursor: pointer;
     }
   }
   #time {

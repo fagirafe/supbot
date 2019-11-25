@@ -1,5 +1,6 @@
+import { RouterModule, Routes } from "@angular/router";
+
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
 import { PageNotFoundComponent } from "./shared/components";
 
 const routes: Routes = [
@@ -32,6 +33,11 @@ const routes: Routes = [
     path: "add-item",
     loadChildren: () =>
       import("./pages/add-item/add-item.module").then(m => m.AddItemModule)
+  },
+  {
+    path: "countdown",
+    loadChildren: () =>
+      import("./pages/countdown/countdown.module").then(m => m.CountdownModule)
   },
   {
     path: "",

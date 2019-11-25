@@ -1,7 +1,10 @@
+import { Event, NavigationEnd, Router } from "@angular/router";
+
+import { AppConfig } from "../environments/environment";
 import { Component } from "@angular/core";
 import { ElectronService } from "./core/services";
+import { ThrowStmt } from "@angular/compiler";
 import { TranslateService } from "@ngx-translate/core";
-import { AppConfig } from "../environments/environment";
 
 @Component({
   selector: "app-root",
@@ -9,9 +12,12 @@ import { AppConfig } from "../environments/environment";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
+  public showNav: boolean = true;
+
   constructor(
     public electronService: ElectronService,
-    private _translate: TranslateService
+    private _translate: TranslateService,
+    private _router: Router
   ) {
     _translate.setDefaultLang("en");
     console.log("AppConfig", AppConfig);
@@ -24,5 +30,14 @@ export class AppComponent {
     } else {
       console.log("Mode web");
     }
+    this._router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        if (event.url == "/countdown") {
+          this.showNav = false;
+        } else {
+          this.showNav = true;
+        }
+      }
+    });
   }
 }

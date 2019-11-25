@@ -1,5 +1,5 @@
 <div id="section-top">
-  <div id="logo">
+  <div id="logo" routerLink="home">
     <span>Supbot</span>
   </div>
   <span id="time">11/05/2019 12:00:00</span>
@@ -7,11 +7,11 @@
 <main>
   <router-outlet></router-outlet>
 </main>
-<div id="main-nav">
+<div id="main-nav" *ngIf="showNav">
   <a class="main-nav-item" routerLink="home">home</a>
   <a class="main-nav-item" routerLink="history">history</a>
   <a class="main-nav-item" routerLink="settings">settings</a>
   <a class="main-nav-item" routerLink="news">news</a>
   <a class="main-nav-item" routerLink="about">about</a>
-  <span>v1.0</span>
+  <span routerLink="countdown">v1.0</span>
 </div>

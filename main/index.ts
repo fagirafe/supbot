@@ -1,9 +1,11 @@
+import * as puppeteer from "puppeteer-core";
+
+import { Product } from "./models/product";
+import { ProductState } from "./models/product_state";
+import { Profile } from "./models/profile";
+import { Settings } from "./models/settings";
 import { Supreme } from "./supreme";
 import { Utility } from "./utility";
-import { Profile } from "./models/profile";
-import { Product } from "./models/product";
-import { Settings } from "./models/settings";
-import { ProductState } from "./models/product_state";
 
 const testProduct: Product = {
   category: "Sweatshirts",
@@ -84,14 +86,15 @@ async function cop(
 
 export namespace Bot {
   export async function start(
+    pieBrowser: puppeteer.Browser,
     product: Product,
     profile: Profile,
     settings: Settings
   ): Promise<void> {
-    // console.log(product, profile, settings);
-    // const supreme = new Supreme();
-    // let runtimeTimer = new Utility.RuntimeTimer();
-    // await supreme.init();
-    // await cop(supreme, runtimeTimer, product, profile, settings);
+    console.log(product, profile, settings);
+    const supreme = new Supreme(pieBrowser);
+    let runtimeTimer = new Utility.RuntimeTimer();
+    await supreme.init();
+    await cop(supreme, runtimeTimer, product, profile, settings);
   }
 }

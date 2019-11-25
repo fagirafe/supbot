@@ -2,7 +2,6 @@ import { app, BrowserWindow, screen, ipcMain } from "electron";
 import * as path from "path";
 import * as url from "url";
 import { Bot } from "./main/index";
-import { async } from "@angular/core/testing";
 
 let win, serve;
 const args = process.argv.slice(1);
@@ -25,7 +24,7 @@ function createWindow() {
 
   if (serve) {
     require("electron-reload")(__dirname, {
-      electron: require(`${__dirname}/../node_modules/electron`)
+      electron: require(`${__dirname}/node_modules/electron`)
     });
     win.loadURL("http://localhost:4200");
   } else {
@@ -86,7 +85,10 @@ ipcMain.on("test", (event, arg) => {
 ipcMain.on("start", async (event, arg) => {
   console.log(arg);
   await Bot.start(
-    arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]],
+    arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]] !=
+      undefined
+      ? arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]]
+      : {},
     arg["profile"],
     arg["settings"]
   );

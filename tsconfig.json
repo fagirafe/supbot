@@ -16,4 +16,4 @@
   "exclude": ["node_modules"]
 }
 
-/* old "module": exnext */
+/* old "module": esnext */

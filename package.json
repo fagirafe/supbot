@@ -26,8 +26,8 @@
     "ng:serve": "ng serve",
     "ng:serve:web": "ng serve -c dev-web -o",
     "electron:serve-tsc": "tsc -p tsconfig-serve.json",
-    "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:serve-tsc && electron ./dist/main.js --serve",
-    "electron:local": "npm run build:prod && electron ./dist/main.js",
+    "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:serve-tsc && electron . --serve",
+    "electron:local": "npm run build:prod && electron .",
     "electron:linux": "npm run build:prod && electron-builder build --linux",
     "electron:windows": "npm run build:prod && electron-builder build --windows",
     "electron:mac": "npm run build:prod && electron-builder build --mac",
@@ -35,8 +35,7 @@
     "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts",
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "lint": "ng lint",
-    "main": "tsc -p tsconfig-main.json && node ./dist/main/index.js",
-    "main-dev": "cross-env TS_NODE_PROJECT='./tsconfig-main.json' ts-node-dev  --inspect --respawn ./main/ main/index.ts"
+    "main-dev": "cross-env TS_NODE_PROJECT='./tsconfig-serve.json' ts-node-dev  --inspect --respawn ./main/ main/index.ts"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "8.2.0",

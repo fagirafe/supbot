@@ -5,10 +5,11 @@ import { ProductState } from "./models/product_state";
 import { Profile } from "./models/profile";
 import { Settings } from "./models/settings";
 import { Utility } from "./utility";
+import * as puppeteer from "puppeteer-core";
 
 export class Supreme extends PupBrowser {
-  constructor() {
-    super("https://www.supremenewyork.com");
+  constructor(pieBrowser: puppeteer.Browser) {
+    super(pieBrowser, "https://www.supremenewyork.com");
   }
 
   public async getMobileStock(): Promise<object> {

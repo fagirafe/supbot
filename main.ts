@@ -3,9 +3,19 @@ import * as path from "path";
 import * as url from "url";
 import { Bot } from "./main/index";
 
-let win, serve;
+import pie from "puppeteer-in-electron";
+import * as puppeteer from "puppeteer-core";
+import { PupBrowser } from "./main/pup_browser";
+
+if (!app.requestSingleInstanceLock()) {
+  app.quit();
+}
+
+let win, serve, pieBrowser;
 const args = process.argv.slice(1);
 serve = args.some(val => val === "--serve");
+
+createPieBrowser();
 
 function createWindow() {
   const electronScreen = screen;
@@ -54,7 +64,9 @@ try {
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
-  app.on("ready", createWindow);
+  app.on("ready", () => {
+    createWindow();
+  });
 
   // Quit when all windows are closed.
   app.on("window-all-closed", () => {
@@ -84,12 +96,36 @@ ipcMain.on("test", (event, arg) => {
 
 ipcMain.on("start", async (event, arg) => {
   console.log(arg);
-  await Bot.start(
-    arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]] !=
-      undefined
-      ? arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]]
-      : {},
-    arg["profile"],
-    arg["settings"]
+  let pupBrowser = new PupBrowser(
+    pieBrowser,
+    "https://www.supremenewyork.com/"
   );
+  await pupBrowser.init();
+  // await Bot.start(
+  //   arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]] !=
+  //     undefined
+  //     ? arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]]
+  //     : {},
+  //   arg["profile"],
+  //   arg["settings"]
+  // );
 });
+
+async function createPieBrowser() {
+  pieBrowser = await pie.connect(app, puppeteer, 3002);
+}
+
+// async function createPieBrowser() {
+//   let browser = await pie.connect(app, puppeteer, 3002);
+
+//   let window = new BrowserWindow();
+//   let url = "https://www.supremenewyork.com/";
+//   await window.loadURL(url);
+
+//   let page = await pie.getPage(browser, window);
+//   page.setUserAgent(
+//     "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1"
+//   );
+//   console.log(page.url());
+//   // window.destroy();
+// }

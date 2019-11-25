@@ -35,50 +35,53 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var puppeteer = require("puppeteer");
+var electron_1 = require("electron");
+var puppeteer_in_electron_1 = require("puppeteer-in-electron");
 var PupBrowser = /** @class */ (function () {
-    function PupBrowser(baseUrl) {
-        this.browser = null;
+    function PupBrowser(pieBrowser, baseUrl) {
+        this.pieBrowser = pieBrowser;
         this.page = null;
+        this.window = null;
         this.baseUrl = baseUrl;
     }
     PupBrowser.prototype.init = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var options, _a, _b;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        options = {
-                            headless: false,
-                            devtools: false,
-                            ignoreHTTPSErrors: true,
-                            defaultViewport: null,
-                            args: [
-                                "--no-sandbox",
-                                "--ignore-certificate-errors",
-                                "--enable-features=NetworkService",
-                                "--allow-running-insecure-content",
-                                "--disable-web-security",
-                                "--user-agent='Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1'"
-                            ]
-                        };
-                        _a = this;
-                        return [4 /*yield*/, puppeteer.launch(options)];
+                        // const options = {
+                        //   headless: false,
+                        //   devtools: false,
+                        //   ignoreHTTPSErrors: true,
+                        //   defaultViewport: null,
+                        //   args: [
+                        //     "--no-sandbox",
+                        //     "--ignore-certificate-errors",
+                        //     "--enable-features=NetworkService",
+                        //     "--allow-running-insecure-content",
+                        //     "--disable-web-security",
+                        //     "--user-agent='Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1'"
+                        //   ]
+                        // };
+                        this.window = new electron_1.BrowserWindow();
+                        return [4 /*yield*/, this.window.loadURL(this.baseUrl)];
                     case 1:
-                        _a.browser = _c.sent();
-                        _b = this;
-                        return [4 /*yield*/, this.browser.newPage()];
+                        _b.sent();
+                        _a = this;
+                        return [4 /*yield*/, puppeteer_in_electron_1.default.getPage(this.pieBrowser, this.window)];
                     case 2:
-                        _b.page = _c.sent();
+                        _a.page = _b.sent();
+                        this.page.setUserAgent("Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1");
                         return [4 /*yield*/, this.page.setViewport({
                                 width: 0,
                                 height: 0
                             })];
                     case 3:
-                        _c.sent();
+                        _b.sent();
                         return [4 /*yield*/, this.page.goto(this.baseUrl, { waitUntil: "networkidle2" })];
                     case 4:
-                        _c.sent();
+                        _b.sent();
                         return [2 /*return*/];
                 }
             });
@@ -88,7 +91,7 @@ var PupBrowser = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.browser.close()];
+                    case 0: return [4 /*yield*/, this.pieBrowser.close()];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];

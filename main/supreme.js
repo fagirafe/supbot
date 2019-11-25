@@ -53,8 +53,8 @@ var request = require("request");
 var utility_1 = require("./utility");
 var Supreme = /** @class */ (function (_super) {
     __extends(Supreme, _super);
-    function Supreme() {
-        return _super.call(this, "https://www.supremenewyork.com") || this;
+    function Supreme(pieBrowser) {
+        return _super.call(this, pieBrowser, "https://www.supremenewyork.com") || this;
     }
     Supreme.prototype.getMobileStock = function () {
         return __awaiter(this, void 0, void 0, function () {

@@ -88,10 +88,10 @@ export namespace Bot {
     profile: Profile,
     settings: Settings
   ): Promise<void> {
-    console.log(product, profile, settings);
-    const supreme = new Supreme();
-    let runtimeTimer = new Utility.RuntimeTimer();
-    await supreme.init();
-    await cop(supreme, runtimeTimer, product, profile, settings);
+    // console.log(product, profile, settings);
+    // const supreme = new Supreme();
+    // let runtimeTimer = new Utility.RuntimeTimer();
+    // await supreme.init();
+    // await cop(supreme, runtimeTimer, product, profile, settings);
   }
 }

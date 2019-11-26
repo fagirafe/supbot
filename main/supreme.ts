@@ -248,7 +248,7 @@ export class Supreme extends PupBrowser {
   ): Promise<void> {
     let recaptchaResponseToken: string;
     // ERROR HAPPENING HERE
-    await this.page.goto(this.baseUrl + "/mobile#checkout", {
+    await this.page.goto(this.baseUrl + "/mobile/#checkout", {
       waitUntil: "networkidle2"
     });
     try {

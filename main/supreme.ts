@@ -247,7 +247,6 @@ export class Supreme extends PupBrowser {
     runtimeTimer: Utility.RuntimeTimer
   ): Promise<void> {
     let recaptchaResponseToken: string;
-    // ERROR HAPPENING HERE
     await this.page.goto(this.baseUrl + "/mobile/#checkout", {
       waitUntil: "networkidle2"
     });

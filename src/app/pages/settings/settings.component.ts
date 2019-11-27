@@ -1,9 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { AppState } from "../../shared/models/app-state";
-import { Store } from "@ngrx/store";
-import { debounceTime } from "rxjs/operators";
 import * as actions from "./settings.actions";
+
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+
+import { AppState } from "../../shared/models/app-state";
+import { Observable } from "rxjs";
+import { Store } from "@ngrx/store";
+import { UtilsService } from "../../core/services/utils/utils.service";
+import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: "app-settings",
@@ -12,10 +16,15 @@ import * as actions from "./settings.actions";
 })
 export class SettingsComponent implements OnInit {
   settingsForm: FormGroup;
+  settings$: Observable<any>;
 
-  constructor(private _fb: FormBuilder, private _store: Store<AppState>) {}
+  constructor(
+    private _fb: FormBuilder,
+    private _store: Store<AppState>,
+    private _utilsService: UtilsService
+  ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.settingsForm = this._fb.group({
       testMode: [false, []],
       dropTime: ["12:00:00", [Validators.required]],
@@ -23,6 +32,9 @@ export class SettingsComponent implements OnInit {
       priceLimit: [0, []]
     });
     this.onChanges();
+    this.settings$ = this._store.select("settings");
+    let settingsState = await this._utilsService.getValue(this.settings$);
+    this.settingsForm.patchValue(settingsState);
   }
 
   onChanges() {

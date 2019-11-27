@@ -1,0 +1,12 @@
+<div id="loading-circle"></div>
+<sup-button
+  label="stop bot"
+  color="black"
+  size="small"
+  (click)="stop()"
+  *ngIf="!isStopping"
+></sup-button>
+<span *ngIf="isStopping">Stopping the bot...</span>
+<span id="stop-error" *ngIf="isStoppingError"
+  >Error while trying to stop! Closing Application...</span
+>

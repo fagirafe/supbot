@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { filter, first } from "rxjs/operators";
 
-import { AppState } from "../../shared/models/app-state";
-import { ElectronService } from "../../core/services";
+import { AppState } from "../../../../shared/models/app-state";
+import { ElectronService } from "../../../../core/services";
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
-import { Settings } from "../../shared/models/settings";
+import { Settings } from "../../../../shared/models/settings";
 import { Store } from "@ngrx/store";
 
 @Component({
@@ -67,12 +67,15 @@ export class CountdownComponent implements OnInit {
 
       this.countdownTime =
         hoursString + ":" + minutesString + ":" + secondsString;
-      console.log(this.countdownTime);
 
       if (distance < 0) {
         clearInterval(this.countdownInterval);
         this.countdownTime = "00:00:00";
-        this._cop();
+        this._router.navigateByUrl("/cop/process");
+        console.log("Countdown over!");
+        return this._cop();
+      } else {
+        console.log(this.countdownTime);
       }
     }, 1000);
   }
@@ -98,12 +101,13 @@ export class CountdownComponent implements OnInit {
       .toPromise();
   }
 
-  private async _cop() {
+  private async _cop(): Promise<void> {
     let stateObj = {
       items: await this._getValue(this.items$),
       profile: await this._getValue(this.profile$),
       settings: await this._getValue(this.settings$)
     };
     this._electronService.ipcRenderer.send("start", stateObj);
+    this._router.navigateByUrl("/cop/process");
   }
 }

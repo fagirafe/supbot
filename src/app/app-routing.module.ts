@@ -35,9 +35,8 @@ const routes: Routes = [
       import("./pages/add-item/add-item.module").then(m => m.AddItemModule)
   },
   {
-    path: "countdown",
-    loadChildren: () =>
-      import("./pages/countdown/countdown.module").then(m => m.CountdownModule)
+    path: "cop",
+    loadChildren: () => import("./pages/cop/cop.module").then(m => m.CopModule)
   },
   {
     path: "",

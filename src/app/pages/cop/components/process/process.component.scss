@@ -1,0 +1,48 @@
+@import "~styles/global/variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#loading-circle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 26px;
+  &::after {
+    content: " ";
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid black;
+    border-color: black transparent black transparent;
+    animation: loading-circle 1.2s linear infinite;
+  }
+}
+
+@keyframes loading-circle {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+span {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#stop-error {
+  margin-top: 16px;
+  color: red;
+}

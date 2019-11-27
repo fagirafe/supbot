@@ -47,6 +47,6 @@ export class PupBrowser {
   }
 
   public async close(): Promise<void> {
-    await this.pieBrowser.close();
+    await this.window.close();
   }
 }

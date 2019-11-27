@@ -32,7 +32,11 @@ export class AppComponent {
     }
     this._router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
-        if (event.url == "/countdown") {
+        if (
+          event.url == "/cop/countdown" ||
+          event.url == "/cop/process" ||
+          event.url == "/cop/summary"
+        ) {
           this.showNav = false;
         } else {
           this.showNav = true;

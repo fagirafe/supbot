@@ -1,14 +1,26 @@
 import * as actions from "./item.actions";
+
 import { EntityState, createEntityAdapter } from "@ngrx/entity";
-import { createFeatureSelector } from "@ngrx/store";
+
 import { Item } from "../../../../shared/models/item";
+import { createFeatureSelector } from "@ngrx/store";
 
 export const itemAdapter = createEntityAdapter<Item>();
 export interface State extends EntityState<Item> {}
 
 const defaultItems = {
-  ids: [],
-  entities: {}
+  ids: ["test"],
+  entities: {
+    test: {
+      id: "test",
+      category: "Sweatshirts",
+      keywords: "Mountain Crewneck",
+      style: "Ash Grey",
+      size: "Medium",
+      styleAlternative: "Ash Grey",
+      sizeAlternative: "small"
+    }
+  }
 };
 
 export const initialState: State = itemAdapter.getInitialState(defaultItems);

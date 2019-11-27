@@ -5,7 +5,6 @@ import * as url from "url";
 import { BrowserWindow, app, ipcMain, screen } from "electron";
 
 import { Bot } from "./main/index";
-import { PupBrowser } from "./main/pup_browser";
 import { async } from "@angular/core/testing";
 import pie from "puppeteer-in-electron";
 
@@ -88,49 +87,51 @@ try {
       createWindow();
     }
   });
+  win.on("closed", () => {
+    app.quit();
+  });
 } catch (e) {
   // Catch Error
   // throw e;
 }
 
-ipcMain.on("test", (event, arg) => {
-  console.log(arg);
-  // event.reply('asynchronous-reply', 'pong')
-});
-
 ipcMain.on("start", async (event, arg) => {
-  console.log(arg);
-  await Bot.start(
-    pieBrowser,
-    arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]] !=
-      undefined
-      ? arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]]
-      : {},
-    arg["profile"],
-    arg["settings"]
-  );
+  console.log("Starting...");
+  try {
+    await Bot.start(
+      arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]] !=
+        undefined
+        ? arg["items"]["entities"][Object.keys(arg["items"]["entities"])[0]]
+        : {},
+      arg["profile"],
+      arg["settings"]
+    );
+  } catch (err) {
+    win.webContents.send("summary", err);
+  }
+  win.webContents.send("summary");
 });
 
 ipcMain.on("prepare", async (event, arg) => {
   console.log("Preparing...");
+  try {
+    await Bot.init(pieBrowser);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 ipcMain.handle("cancel", async (event, arg) => {
   console.log("Canceling...");
-  return;
+  await Bot.closeWindows();
+  return Promise.resolve();
 });
 
-// async function createPieBrowser() {
-//   let browser = await pie.connect(app, puppeteer, 3002);
+ipcMain.handle("stop", async (event, arg) => {
+  console.log("Stopping...");
+  return Promise.resolve();
+});
 
-//   let window = new BrowserWindow();
-//   let url = "https://www.supremenewyork.com/";
-//   await window.loadURL(url);
-
-//   let page = await pie.getPage(browser, window);
-//   page.setUserAgent(
-//     "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1"
-//   );
-//   console.log(page.url());
-//   // window.destroy();
-// }
+ipcMain.on("quit", (event, arg) => {
+  app.quit();
+});

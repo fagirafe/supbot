@@ -253,7 +253,7 @@ export class Supreme extends PupBrowser {
     try {
       recaptchaResponseToken = await Utility.getRecaptchaResponseToken();
     } catch (err) {
-      throw new Error(err);
+      return Promise.reject(err);
     }
     await this.page.waitForSelector("#mobile_checkout_form");
     await this.page.evaluate(

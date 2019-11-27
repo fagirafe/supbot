@@ -26,6 +26,6 @@ export class ConfirmationComponent implements OnInit {
 
   public start() {
     this._electronService.ipcRenderer.send("prepare");
-    this._router.navigateByUrl("/countdown");
+    this._router.navigateByUrl("/cop/countdown");
   }
 }

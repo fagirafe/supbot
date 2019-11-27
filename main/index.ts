@@ -6,39 +6,7 @@ import { Profile } from "./models/profile";
 import { Settings } from "./models/settings";
 import { Supreme } from "./supreme";
 import { Utility } from "./utility";
-
-const testProduct: Product = {
-  category: "Sweatshirts",
-  keywords: "Disturbed Zip Up Hooded Sweatshirt",
-  style: "Light Violet",
-  size: "Medium",
-  styleAlternative: "Red",
-  sizeAlternative: "Medium"
-};
-
-const testProfile: Profile = {
-  profileName: "",
-  fullName: "",
-  email: "",
-  tel: "",
-  address: "",
-  city: "",
-  zip: "",
-  country: "",
-  type: "",
-  cardNumber: "",
-  expMonth: "",
-  expYear: "",
-  CVV: "",
-  terms: true
-};
-
-const testSettings: Settings = {
-  testMode: true,
-  dropTime: "12:00:00",
-  delay: 3000,
-  priceLimit: 0
-};
+import { async } from "@angular/core/testing";
 
 async function cop(
   supreme: Supreme,
@@ -46,7 +14,7 @@ async function cop(
   product: Product,
   profile: Profile,
   settings: Settings
-) {
+): Promise<void> {
   try {
     let productToCop: object = await supreme.searchProductByKeywords(product);
     console.log(productToCop);
@@ -64,37 +32,45 @@ async function cop(
     }
     runtimeTimer.start();
     await supreme.addProductToCart(productState);
-    try {
-      await supreme.checkout(profile, settings, runtimeTimer);
-    } catch (err) {
-      console.log(err);
-    }
   } catch (err) {
     setTimeout(() => {
       console.log(err);
       cop(supreme, runtimeTimer, product, profile, settings);
     }, 200);
   }
+  try {
+    await supreme.checkout(profile, settings, runtimeTimer);
+  } catch (err) {
+    return Promise.reject(err);
+  }
 }
 
-// (async () => {
-//   const supreme = new Supreme();
-//   let runtimeTimer = new Utility.RuntimeTimer();
-//   await supreme.init();
-//   await cop(supreme, runtimeTimer);
-// })();
-
 export namespace Bot {
+  let supreme: Supreme;
+  let runtimeTimer: Utility.RuntimeTimer = new Utility.RuntimeTimer();
+
+  export async function init(pieBrowser: puppeteer.Browser): Promise<void> {
+    supreme = new Supreme(pieBrowser);
+    await supreme.init();
+    // Initialize CaptchaHarvester
+  }
+
   export async function start(
-    pieBrowser: puppeteer.Browser,
     product: Product,
     profile: Profile,
     settings: Settings
   ): Promise<void> {
     console.log(product, profile, settings);
-    const supreme = new Supreme(pieBrowser);
-    let runtimeTimer = new Utility.RuntimeTimer();
-    await supreme.init();
-    await cop(supreme, runtimeTimer, product, profile, settings);
+    try {
+      await cop(supreme, runtimeTimer, product, profile, settings);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  export async function closeWindows() {
+    if (supreme) {
+      supreme.close();
+    }
   }
 }

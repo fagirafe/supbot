@@ -5,6 +5,7 @@ import { Component } from "@angular/core";
 import { ElectronService } from "./core/services";
 import { ThrowStmt } from "@angular/compiler";
 import { TranslateService } from "@ngx-translate/core";
+import { version } from "../../package.json";
 
 @Component({
   selector: "app-root",
@@ -13,6 +14,7 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class AppComponent {
   public showNav: boolean = true;
+  public version: string = version;
 
   constructor(
     public electronService: ElectronService,

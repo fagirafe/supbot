@@ -33,16 +33,19 @@ export class PupBrowser {
     // };
 
     this.window = new BrowserWindow();
-    await this.window.loadURL(this.baseUrl);
 
     this.page = await pie.getPage(this.pieBrowser, this.window);
-    this.page.setUserAgent(
+    let client = await this.page.target().createCDPSession();
+    await client.send("Network.clearBrowserCookies");
+    await client.send("Network.clearBrowserCache");
+    await this.page.setUserAgent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1"
     );
     await this.page.setViewport({
       width: 0,
       height: 0
     });
+    // await this.window.loadURL(this.baseUrl);
     await this.page.goto(this.baseUrl, { waitUntil: "networkidle2" });
   }
 

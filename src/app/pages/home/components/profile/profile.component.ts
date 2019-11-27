@@ -1,8 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { AppState } from "../../../../shared/models/app-state";
-import { Store } from "@ngrx/store";
 import * as actions from "./profile.actions";
+
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+
+import { AppState } from "../../../../shared/models/app-state";
+import { Observable } from "rxjs";
+import { Store } from "@ngrx/store";
+import { UtilsService } from "../../../../core/services/utils/utils.service";
 import { debounceTime } from "rxjs/operators";
 
 @Component({
@@ -13,10 +17,15 @@ import { debounceTime } from "rxjs/operators";
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
   isNewProfile: boolean = false;
+  profile$: Observable<any>;
 
-  constructor(private _fb: FormBuilder, private _store: Store<AppState>) {}
+  constructor(
+    private _fb: FormBuilder,
+    private _store: Store<AppState>,
+    public _utilsService: UtilsService
+  ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.profileForm = this._fb.group({
       profileName: ["", [Validators.required]],
       fullName: ["", [Validators.required]],
@@ -34,6 +43,9 @@ export class ProfileComponent implements OnInit {
       terms: [false, [Validators.requiredTrue]]
     });
     this.onChanges();
+    this.profile$ = this._store.select("profile");
+    let profileState = await this._utilsService.getValue(this.profile$);
+    this.profileForm.patchValue(profileState);
   }
 
   toggleProfileType() {

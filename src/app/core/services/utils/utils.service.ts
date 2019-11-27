@@ -1,5 +1,6 @@
 import { filter, first } from "rxjs/operators";
 
+import { ElectronService } from "../electron/electron.service";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
@@ -7,7 +8,7 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class UtilsService {
-  constructor() {}
+  constructor(private _electronService: ElectronService) {}
 
   public getValue(observable: Observable<any>): Promise<any> {
     return observable
@@ -16,5 +17,9 @@ export class UtilsService {
         first()
       )
       .toPromise();
+  }
+
+  public openLink(link: string) {
+    this._electronService.ipcRenderer.send("open-link", link);
   }
 }

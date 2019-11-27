@@ -1,4 +1,5 @@
 import * as actions from "./profile.actions";
+
 import { Profile } from "../../../../shared/models/profile";
 
 const defaultProfile: Profile = {
@@ -9,11 +10,11 @@ const defaultProfile: Profile = {
   address: "",
   city: "",
   zip: "",
-  country: "",
+  country: "DE",
   type: "",
   cardNumber: "",
-  expMonth: "",
-  expYear: "",
+  expMonth: "01",
+  expYear: "2019",
   CVV: "",
   terms: false
 };

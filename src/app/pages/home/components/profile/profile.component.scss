@@ -61,5 +61,19 @@
   }
   p {
     padding-left: 8px;
+    a {
+      color: blue;
+      text-decoration: underline;
+      &:hover {
+        cursor: pointer;
+      }
+      &:active {
+        color: black;
+      }
+    }
   }
+}
+
+.hidden {
+  display: none;
 }

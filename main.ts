@@ -2,7 +2,7 @@ import * as path from "path";
 import * as puppeteer from "puppeteer-core";
 import * as url from "url";
 
-import { BrowserWindow, app, ipcMain, screen } from "electron";
+import { BrowserWindow, app, ipcMain, screen, shell } from "electron";
 
 import { Bot } from "./main/index";
 import { async } from "@angular/core/testing";
@@ -132,4 +132,8 @@ ipcMain.handle("stop", async (event, arg) => {
 
 ipcMain.on("quit", (event, arg) => {
   app.quit();
+});
+
+ipcMain.on("open-link", (event, arg) => {
+  shell.openExternal(arg);
 });

@@ -1,18 +1,18 @@
 {
   "name": "supbot",
-  "version": "6.3.1",
-  "description": "Angular 8 with Electron (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
+  "version": "v1.0.0",
+  "description": "A bot to cop products from https://www.supremenewyork.com",
   "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
+    "name": "Maximilian Winter"
   },
   "keywords": [
     "angular",
     "angular 8",
     "electron",
     "typescript",
-    "sass"
+    "sass",
+    "bot",
+    "supreme"
   ],
   "main": "./dist-main/main.js",
   "private": true,

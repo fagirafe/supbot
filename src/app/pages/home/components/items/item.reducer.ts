@@ -16,9 +16,9 @@ const defaultItems = {
       category: "Sweatshirts",
       keywords: "Mountain Crewneck",
       style: "Ash Grey",
-      size: "Medium",
+      size: "Large",
       styleAlternative: "Ash Grey",
-      sizeAlternative: "small"
+      sizeAlternative: "XLarge"
     }
   }
 };

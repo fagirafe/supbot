@@ -4,7 +4,7 @@
       <div class="content-heading-bar">
         <span>billing/shipping information</span>
       </div>
-      <div class="sup-select" *ngIf="!isNewProfile">
+      <div class="sup-select hidden" *ngIf="!isNewProfile">
         <div class="sup-form-label">
           <span>profile</span>
         </div>
@@ -15,7 +15,7 @@
           new
         </button>
       </div>
-      <div class="sup-input" *ngIf="isNewProfile">
+      <div class="sup-input hidden" *ngIf="isNewProfile">
         <div class="sup-form-label">
           <span>profile name</span>
         </div>
@@ -24,7 +24,7 @@
           select
         </button>
       </div>
-      <span class="form-info"
+      <span class="form-info hidden"
         >must be the same as your credit card address</span
       >
       <div class="sup-input">
@@ -134,8 +134,22 @@
         <input type="checkbox" formControlName="terms" />
         <p>
           I have read and aggree to the
-          <a href="">terms & conditions</a>, and accept the
-          <a href="">return policy</a>
+          <a
+            (click)="
+              _utilsService.openLink(
+                'https://www.supremenewyork.com/shop/terms'
+              )
+            "
+            >terms & conditions</a
+          >, and accept the
+          <a
+            (click)="
+              _utilsService.openLink(
+                'https://www.supremenewyork.com/shop/shipping'
+              )
+            "
+            >return policy</a
+          >
         </p>
       </div>
     </div>
@@ -148,6 +162,7 @@
     size="large"
     class="button-padding"
     (click)="clearProfile()"
+    class="hidden"
   ></sup-button>
   <sup-button
     label="save"
@@ -155,6 +170,7 @@
     size="large"
     class="button-padding"
     (click)="setProfile()"
+    class="hidden"
   ></sup-button>
   <sup-button
     label="next"

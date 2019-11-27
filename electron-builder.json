@@ -13,6 +13,7 @@
     "!src/",
     "!e2e/",
     "!hooks/",
+    "!main/",
     "!angular.json",
     "!_config.yml",
     "!karma.conf.js",

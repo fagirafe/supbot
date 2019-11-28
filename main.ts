@@ -5,7 +5,7 @@ import * as url from "url";
 import { BrowserWindow, app, ipcMain, screen, shell } from "electron";
 
 import { Bot } from "./main/bot";
-import Main from "./main/electron-main";
+import Main from "./main/electron_main";
 import { ProcessLogger } from "./main/process_logger";
 import pie from "puppeteer-in-electron";
 
@@ -13,7 +13,7 @@ if (!app.requestSingleInstanceLock()) {
   app.quit();
 }
 
-let win: BrowserWindow, serve: boolean, pieBrowser: puppeteer.Browser;
+let serve: boolean, pieBrowser: puppeteer.Browser;
 const args = process.argv.slice(1);
 serve = args.some(val => val === "--serve");
 

@@ -1,5 +1,6 @@
 import * as puppeteer from "puppeteer-core";
 
+import { CaptchaHarvester } from "./captcha_harvester";
 import { ProcessLogger } from "./process_logger";
 import { Product } from "./models/product";
 import { ProductState } from "./models/product_state";
@@ -55,11 +56,15 @@ async function cop(
 
 export namespace Bot {
   let supreme: Supreme;
+  let captchaHarvester: CaptchaHarvester;
   let runtimeTimer: Utils.RuntimeTimer = new Utils.RuntimeTimer();
 
   export async function init(pieBrowser: puppeteer.Browser): Promise<void> {
     supreme = new Supreme(pieBrowser);
+    captchaHarvester = new CaptchaHarvester(pieBrowser);
     await supreme.init();
+    await captchaHarvester.init();
+    await captchaHarvester.harvest();
     // Initialize CaptchaHarvester
   }
 

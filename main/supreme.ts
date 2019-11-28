@@ -9,7 +9,7 @@ import * as puppeteer from "puppeteer-core";
 
 export class Supreme extends PupBrowser {
   constructor(pieBrowser: puppeteer.Browser) {
-    super(pieBrowser, "https://www.supremenewyork.com");
+    super(pieBrowser, "https://www.supremenewyork.com/");
   }
 
   public async getMobileStock(): Promise<object> {

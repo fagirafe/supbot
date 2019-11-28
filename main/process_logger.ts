@@ -1,4 +1,4 @@
-import Main from "./electron-main";
+import Main from "./electron_main";
 import { ProcessLog } from "./models/process_log";
 import { Utils } from "./utils";
 

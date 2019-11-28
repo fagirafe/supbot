@@ -7,7 +7,6 @@ import { Profile } from "./models/profile";
 import { Settings } from "./models/settings";
 import { Supreme } from "./supreme";
 import { Utils } from "./utils";
-import { async } from "@angular/core/testing";
 
 async function cop(
   supreme: Supreme,

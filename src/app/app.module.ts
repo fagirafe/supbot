@@ -1,30 +1,28 @@
 import "reflect-metadata";
 import "../polyfills";
 
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { HttpClientModule, HttpClient } from "@angular/common/http";
-import { CoreModule } from "./core/core.module";
-import { SharedModule } from "./shared/shared.module";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 
+import { AboutModule } from "./pages/about/about.module";
+import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
+import { BrowserModule } from "@angular/platform-browser";
+import { CoreModule } from "./core/core.module";
+import { FormsModule } from "@angular/forms";
+import { HistoryModule } from "./pages/history/history.module";
+import { HomeModule } from "./pages/home/home.module";
+import { NewsModule } from "./pages/news/news.module";
+import { NgModule } from "@angular/core";
+import { SettingsModule } from "./pages/settings/settings.module";
+import { SharedModule } from "./shared/shared.module";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { StoreModule } from "@ngrx/store";
+import { SupButtonComponent } from "./shared/components";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { reducers } from "./reducers";
 
 // NG Translate
-import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-
-import { HomeModule } from "./pages/home/home.module";
-
-import { AppComponent } from "./app.component";
-import { HistoryModule } from "./pages/history/history.module";
-import { SettingsModule } from "./pages/settings/settings.module";
-import { NewsModule } from "./pages/news/news.module";
-import { AboutModule } from "./pages/about/about.module";
-
-import { StoreModule } from "@ngrx/store";
-import { StoreDevtoolsModule } from "@ngrx/store-devtools";
-import { reducers } from "./reducers";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {

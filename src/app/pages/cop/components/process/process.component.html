@@ -1,33 +1,20 @@
-<!-- <div id="loading-circle"></div>
-<sup-button
-  label="stop bot"
-  color="black"
-  size="small"
-  (click)="stop()"
-  *ngIf="!isStopping"
-></sup-button>
-<span *ngIf="isStopping">Stopping the bot...</span>
-<span id="stop-error" *ngIf="isStoppingError"
-  >Error while trying to stop! Closing Application...</span
-> -->
-
-<!-- <div id="log-box" #logBox></div> -->
-<!-- 
-<sup-button
-  label="test"
-  color="black"
-  size="small"
-  (click)="test()"
-></sup-button> -->
-
 <div class="window-container">
   <div id="log-box" #logBox class="fit-space"></div>
   <div class="window-bottom-actions">
     <sup-button
+      label="back"
+      color="black"
+      size="large"
+      *ngIf="isFinished"
+      routerLink="/"
+    ></sup-button>
+    <sup-button
       label="stop"
       color="red"
       size="large"
-      (click)="test()"
+      *ngIf="!isFinished"
+      (click)="stop()"
     ></sup-button>
+    <span *ngIf="isStopping">Stopping the bot...</span>
   </div>
 </div>

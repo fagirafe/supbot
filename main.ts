@@ -4,8 +4,9 @@ import * as url from "url";
 
 import { BrowserWindow, app, ipcMain, screen, shell } from "electron";
 
-import { Bot } from "./main/index";
+import { Bot } from "./main/bot";
 import Main from "./main/electron-main";
+import { ProcessLogger } from "./main/process_logger";
 import pie from "puppeteer-in-electron";
 
 if (!app.requestSingleInstanceLock()) {
@@ -22,83 +23,6 @@ serve = args.some(val => val === "--serve");
 
 Main.main(app, BrowserWindow, serve);
 
-// function createWindow() {
-//   const electronScreen = screen;
-//   const size = electronScreen.getPrimaryDisplay().workAreaSize;
-
-//   // Create the browser window.
-//   win = new BrowserWindow({
-//     x: 0,
-//     y: 0,
-//     width: 900,
-//     height: 800,
-//     minWidth: 900,
-//     minHeight: 800,
-//     webPreferences: {
-//       nodeIntegration: true
-//     }
-//   });
-
-//   if (serve) {
-//     require("electron-reload")(__dirname, {
-//       electron: require(`${__dirname}/../node_modules/electron`)
-//     });
-//     win.loadURL("http://localhost:4200");
-//   } else {
-//     win.loadURL(
-//       url.format({
-//         pathname: path.join(__dirname, "/../dist/index.html"),
-//         protocol: "file:",
-//         slashes: true
-//       })
-//     );
-//   }
-
-//   if (serve) {
-//     win.webContents.openDevTools();
-//   } else {
-//     win.setAutoHideMenuBar(true);
-//   }
-
-//   // Emitted when the window is closed.
-//   win.on("closed", () => {
-//     // Dereference the window object, usually you would store window
-//     // in an array if your app supports multi windows, this is the time
-//     // when you should delete the corresponding element.
-//     win = null;
-//     app.quit();
-//   });
-// }
-
-// try {
-//   // This method will be called when Electron has finished
-//   // initialization and is ready to create browser windows.
-//   // Some APIs can only be used after this event occurs.
-//   app.on("ready", () => {
-//     createWindow();
-//   });
-
-//   // Quit when all windows are closed.
-//   app.on("window-all-closed", () => {
-//     // On OS X it is common for applications and their menu bar
-//     // to stay active until the user quits explicitly with Cmd + Q
-//     if (process.platform !== "darwin") {
-//       app.quit();
-//     }
-//   });
-
-//   app.on("activate", () => {
-//     // On OS X it's common to re-create a window in the app when the
-//     // dock icon is clicked and there are no other windows open.
-//     if (win === null) {
-//       createWindow();
-//     }
-//   });
-// } catch (e) {
-//   // Catch Error
-//   // throw e;
-// }
-
 ipcMain.on("start", async (event, arg) => {
   console.log("Starting...");
   try {
@@ -111,9 +35,12 @@ ipcMain.on("start", async (event, arg) => {
       arg["settings"]
     );
   } catch (err) {
-    win.webContents.send("summary", err);
+    return ProcessLogger.log(ProcessLogger.LogType.Error, err);
   }
-  win.webContents.send("summary");
+  return ProcessLogger.log(
+    ProcessLogger.LogType.Finished,
+    "Finished the cop process!"
+  );
 });
 
 ipcMain.on("prepare", async (event, arg) => {

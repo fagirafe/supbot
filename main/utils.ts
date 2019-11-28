@@ -35,4 +35,22 @@ export namespace Utils {
       });
     });
   }
+
+  export function createTimestamp(): string {
+    let current = new Date().getTime();
+    let hours: number = Math.floor(
+      (current % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    let minutes: number = Math.floor(
+      (current % (1000 * 60 * 60)) / (1000 * 60)
+    );
+    let seconds: number = Math.floor((current % (1000 * 60)) / 1000);
+    let hoursString: string = hours < 10 ? "0" + hours : hours.toString();
+    let minutesString: string =
+      minutes < 10 ? "0" + minutes : minutes.toString();
+    let secondsString: string =
+      seconds < 10 ? "0" + seconds : seconds.toString();
+    let timestamp = hoursString + ":" + minutesString + ":" + secondsString;
+    return timestamp;
+  }
 }

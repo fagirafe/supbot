@@ -1,5 +1,6 @@
 import * as puppeteer from "puppeteer-core";
 
+import { ProcessLogger } from "./process_logger";
 import { Product } from "./models/product";
 import { ProductState } from "./models/product_state";
 import { Profile } from "./models/profile";
@@ -18,11 +19,19 @@ async function cop(
   try {
     let productToCop: object = await supreme.searchProductByKeywords(product);
     console.log(productToCop);
+    ProcessLogger.log(
+      ProcessLogger.LogType.State,
+      "Product to cop: " + JSON.stringify(productToCop)
+    );
     let productState: ProductState = await supreme.getProductState(
       productToCop["id"],
       product
     );
     console.log(productState);
+    ProcessLogger.log(
+      ProcessLogger.LogType.State,
+      "State of product: " + JSON.stringify(productState)
+    );
     if (
       !productState.found ||
       !productState.stock_level ||
@@ -34,7 +43,7 @@ async function cop(
     await supreme.addProductToCart(productState);
   } catch (err) {
     setTimeout(() => {
-      console.log(err);
+      ProcessLogger.log(ProcessLogger.LogType.Info, err);
       cop(supreme, runtimeTimer, product, profile, settings);
     }, 200);
   }
@@ -62,6 +71,7 @@ export namespace Bot {
   ): Promise<void> {
     console.log(product, profile, settings);
     try {
+      ProcessLogger.log(ProcessLogger.LogType.State, "Starting to cop...");
       await cop(supreme, runtimeTimer, product, profile, settings);
     } catch (err) {
       return Promise.reject(err);

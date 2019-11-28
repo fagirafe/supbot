@@ -4,7 +4,7 @@ import * as request from "request";
 import { ProductState } from "./models/product_state";
 import { Profile } from "./models/profile";
 import { Settings } from "./models/settings";
-import { Utility } from "./utility";
+import { Utils } from "./utils";
 import * as puppeteer from "puppeteer-core";
 
 export class Supreme extends PupBrowser {
@@ -244,23 +244,23 @@ export class Supreme extends PupBrowser {
   public async checkout(
     profile: Profile,
     settings: Settings,
-    runtimeTimer: Utility.RuntimeTimer
+    runtimeTimer: Utils.RuntimeTimer
   ): Promise<void> {
     let recaptchaResponseToken: string;
     await this.page.goto(this.baseUrl + "/mobile/#checkout", {
       waitUntil: "networkidle2"
     });
-    try {
-      recaptchaResponseToken = await Utility.getRecaptchaResponseToken();
-    } catch (err) {
-      return Promise.reject(err);
-    }
+    // try {
+    //   recaptchaResponseToken = await Utility.getRecaptchaResponseToken();
+    // } catch (err) {
+    //   return Promise.reject(err);
+    // }
     await this.page.waitForSelector("#mobile_checkout_form");
     await this.page.evaluate(
       (profile, recaptchaResponseToken) => {
         (<HTMLInputElement>(
           document.getElementById("order_billing_name")
-        )).value = profile["name"];
+        )).value = profile["fullName"];
         (<HTMLInputElement>document.getElementById("order_email")).value =
           profile["email"];
         (<HTMLInputElement>document.getElementById("order_tel")).value =
@@ -280,37 +280,39 @@ export class Supreme extends PupBrowser {
           document.getElementById("credit_card_type")
         )).value = profile["type"].toLowerCase();
         (<HTMLInputElement>document.getElementById("credit_card_n")).value =
-          profile["cardnumber"];
+          profile["cardNumber"];
         (<HTMLInputElement>document.getElementById("credit_card_month")).value =
-          profile["month"];
+          profile["expMonth"];
         (<HTMLInputElement>document.getElementById("credit_card_year")).value =
-          profile["year"];
+          profile["expYear"];
         (<HTMLInputElement>document.getElementById("credit_card_cvv")).value =
-          profile["cvv"];
+          profile["CVV"];
         (<HTMLInputElement>(
           document.querySelector("input[name='order[terms]']")
         )).value = "1";
         (<HTMLInputElement>document.getElementById("order_terms")).value = "1";
-        (<HTMLInputElement>(
-          document.getElementById("g-recaptcha-response")
-        )).value = recaptchaResponseToken;
+        // (<HTMLInputElement>(
+        //   document.getElementById("g-recaptcha-response")
+        // )).value = recaptchaResponseToken;
       },
       JSON.parse(JSON.stringify(profile)),
       recaptchaResponseToken
     );
-    let totalString = await this.page.evaluate(() => {
-      return Promise.resolve(document.getElementById("total").innerHTML);
-    });
-    totalString = totalString.replace("€", "");
-    let total = parseInt(totalString);
-    if (total > settings["priceLimit"]) {
-      throw new Error(
-        "Order total of " +
-          total +
-          "€ is higher than price limit of " +
-          settings["priceLimit"] +
-          "€"
-      );
+    if (settings.priceLimit != 0) {
+      let totalString = await this.page.evaluate(() => {
+        return Promise.resolve(document.getElementById("total").innerHTML);
+      });
+      totalString = totalString.replace("€", "");
+      let total = parseInt(totalString);
+      if (total > settings["priceLimit"]) {
+        Promise.reject(
+          "Order total of " +
+            total +
+            "€ is higher than price limit of " +
+            settings["priceLimit"] +
+            "€"
+        );
+      }
     }
     await this.delay(settings.delay, runtimeTimer);
     if (!settings["testMode"]) {
@@ -320,16 +322,16 @@ export class Supreme extends PupBrowser {
 
   public async delay(
     delayTime: number,
-    runtimeTimer: Utility.RuntimeTimer
+    runtimeTimer: Utils.RuntimeTimer
   ): Promise<void> {
     return new Promise((resolve, reject) => {
-      (function() {
+      (function delay() {
         let runtimeDiff = runtimeTimer.getRuntimeMs();
         if (runtimeDiff > delayTime) {
           resolve();
         } else {
           setTimeout(() => {
-            this.delay();
+            delay();
           }, 50);
         }
       })();

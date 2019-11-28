@@ -14,14 +14,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 26px;
+  margin-right: 16px;
   &::after {
     content: " ";
     display: block;
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    border: 3px solid black;
+    border: 2px solid black;
     border-color: black transparent black transparent;
     animation: loading-circle 1.2s linear infinite;
   }
@@ -45,4 +45,11 @@ span {
 #stop-error {
   margin-top: 16px;
   color: red;
+}
+
+#log-box {
+  width: 100%;
+  overflow-y: scroll;
+  padding: 8px;
+  word-wrap: break-word;
 }

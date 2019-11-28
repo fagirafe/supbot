@@ -33,6 +33,7 @@ export class PupBrowser {
     // };
 
     this.window = new BrowserWindow();
+    this.window.setMenuBarVisibility(false);
 
     this.page = await pie.getPage(this.pieBrowser, this.window);
     let client = await this.page.target().createCDPSession();

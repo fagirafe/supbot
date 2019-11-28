@@ -1,6 +1,6 @@
 import * as request from "request";
 
-export namespace Utility {
+export namespace Utils {
   export class RuntimeTimer {
     private readonly NS_PER_SEC: number = 1e9;
     private readonly MS_PER_NS: number = 1e-6;

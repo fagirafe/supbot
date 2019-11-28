@@ -1,4 +1,4 @@
-<div id="loading-circle"></div>
+<!-- <div id="loading-circle"></div>
 <sup-button
   label="stop bot"
   color="black"
@@ -9,4 +9,25 @@
 <span *ngIf="isStopping">Stopping the bot...</span>
 <span id="stop-error" *ngIf="isStoppingError"
   >Error while trying to stop! Closing Application...</span
->
+> -->
+
+<!-- <div id="log-box" #logBox></div> -->
+<!-- 
+<sup-button
+  label="test"
+  color="black"
+  size="small"
+  (click)="test()"
+></sup-button> -->
+
+<div class="window-container">
+  <div id="log-box" #logBox class="fit-space"></div>
+  <div class="window-bottom-actions">
+    <sup-button
+      label="stop"
+      color="red"
+      size="large"
+      (click)="test()"
+    ></sup-button>
+  </div>
+</div>

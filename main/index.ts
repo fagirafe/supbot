@@ -5,12 +5,12 @@ import { ProductState } from "./models/product_state";
 import { Profile } from "./models/profile";
 import { Settings } from "./models/settings";
 import { Supreme } from "./supreme";
-import { Utility } from "./utility";
+import { Utils } from "./utils";
 import { async } from "@angular/core/testing";
 
 async function cop(
   supreme: Supreme,
-  runtimeTimer: Utility.RuntimeTimer,
+  runtimeTimer: Utils.RuntimeTimer,
   product: Product,
   profile: Profile,
   settings: Settings
@@ -47,7 +47,7 @@ async function cop(
 
 export namespace Bot {
   let supreme: Supreme;
-  let runtimeTimer: Utility.RuntimeTimer = new Utility.RuntimeTimer();
+  let runtimeTimer: Utils.RuntimeTimer = new Utils.RuntimeTimer();
 
   export async function init(pieBrowser: puppeteer.Browser): Promise<void> {
     supreme = new Supreme(pieBrowser);

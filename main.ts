@@ -1,5 +1,6 @@
 import * as path from "path";
 import * as puppeteer from "puppeteer-core";
+import * as updater from "electron-simple-updater";
 import * as url from "url";
 
 import { BrowserWindow, app, ipcMain, screen, shell } from "electron";
@@ -20,6 +21,8 @@ serve = args.some(val => val === "--serve");
 (async () => {
   pieBrowser = await pie.connect(app, puppeteer, 3002);
 })();
+
+// updater.init();
 
 Main.main(app, BrowserWindow, serve);
 

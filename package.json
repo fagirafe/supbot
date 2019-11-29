@@ -1,6 +1,6 @@
 {
   "name": "supbot",
-  "version": "v1.0.0",
+  "version": "1.0.0",
   "description": "A bot to cop products from https://www.supremenewyork.com",
   "author": {
     "name": "Maximilian Winter"
@@ -16,6 +16,13 @@
   ],
   "main": "./dist-main/main.js",
   "private": true,
+  "updater": {
+    "url": "https://github.com/blaueeiner/supbot/updates.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blaueeiner/supbot.git"
+  },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "ng": "ng",
@@ -35,7 +42,9 @@
     "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts",
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "lint": "ng lint",
-    "main-dev": "cross-env TS_NODE_PROJECT='./tsconfig-serve.json' ts-node-dev  --inspect --respawn ./main/ main/index.ts"
+    "main-dev": "cross-env TS_NODE_PROJECT='./tsconfig-serve.json' ts-node-dev  --inspect --respawn ./main/ main/index.ts",
+    "publish": "publish -p ./release",
+    "release:windows": "npm run electron:windows && npm run publish"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "8.2.0",
@@ -69,7 +78,9 @@
     "cross-env": "^6.0.3",
     "electron": "7.0.0",
     "electron-builder": "21.2.0",
+    "electron-builder-squirrel-windows": "^22.2.0",
     "electron-reload": "1.5.0",
+    "electron-simple-publisher": "^0.6.2",
     "jasmine-core": "3.4.0",
     "jasmine-spec-reporter": "4.2.1",
     "karma": "4.2.0",
@@ -94,6 +105,7 @@
     "node": ">=10.9.0"
   },
   "dependencies": {
+    "electron-simple-updater": "^1.5.0",
     "puppeteer-core": "^2.0.0",
     "puppeteer-in-electron": "^1.0.7",
     "request": "^2.88.0"

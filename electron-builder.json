@@ -18,11 +18,13 @@
     "!_config.yml",
     "!karma.conf.js",
     "!tsconfig.json",
-    "!tslint.json"
+    "!tslint.json",
+    "!publisher.json",
+    "!updates.json"
   ],
   "win": {
     "icon": "dist",
-    "target": ["portable"]
+    "target": ["portable", "squirrel"]
   },
   "mac": {
     "icon": "dist",

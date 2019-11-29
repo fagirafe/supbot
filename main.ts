@@ -43,10 +43,11 @@ ipcMain.on("start", async (event, arg) => {
   );
 });
 
-ipcMain.on("prepare", async (event, arg) => {
+ipcMain.handle("prepare", async (event, arg) => {
   console.log("Preparing...");
   try {
     await Bot.init(pieBrowser);
+    return Promise.resolve();
   } catch (err) {
     console.log(err);
   }

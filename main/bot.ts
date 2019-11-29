@@ -65,7 +65,6 @@ export namespace Bot {
     await supreme.init();
     await captchaHarvester.init();
     await captchaHarvester.harvest();
-    // Initialize CaptchaHarvester
   }
 
   export async function start(

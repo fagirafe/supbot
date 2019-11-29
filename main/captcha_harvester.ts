@@ -7,7 +7,7 @@ export class CaptchaHarvester extends PupBrowser {
   static tokenBank: Array<any> = [];
   private sitekey: string = "6LeWwRkUAAAAAOBsau7KpuC9AV-6J8mhw4AjC3Xz";
   constructor(pieBrowser: puppeteer.Browser) {
-    super(pieBrowser, "https://www.supremenewyork.com/");
+    super(pieBrowser);
   }
   public async harvest() {
     await this.page.setUserAgent(
@@ -60,7 +60,6 @@ export class CaptchaHarvester extends PupBrowser {
 
     this.page.on("request", req => {
       if (req.url() === this.baseUrl) {
-        console.log("Test");
         req.respond({
           status: 200,
           contentType: "text/html",

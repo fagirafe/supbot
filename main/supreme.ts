@@ -6,10 +6,13 @@ import { Profile } from "./models/profile";
 import { Settings } from "./models/settings";
 import { Utils } from "./utils";
 import * as puppeteer from "puppeteer-core";
+import { CaptchaHarvester } from "./captcha_harvester";
+import { ProcessLogger } from "./process_logger";
+import { IfStmt } from "@angular/compiler";
 
 export class Supreme extends PupBrowser {
   constructor(pieBrowser: puppeteer.Browser) {
-    super(pieBrowser, "https://www.supremenewyork.com/");
+    super(pieBrowser);
   }
 
   public async getMobileStock(): Promise<object> {
@@ -246,15 +249,24 @@ export class Supreme extends PupBrowser {
     settings: Settings,
     runtimeTimer: Utils.RuntimeTimer
   ): Promise<void> {
-    let recaptchaResponseToken: string;
+    let tokenBank = CaptchaHarvester.tokenBank;
+    let recaptchaResponseToken;
     await this.page.goto(this.baseUrl + "/mobile/#checkout", {
       waitUntil: "networkidle2"
     });
-    // try {
-    //   recaptchaResponseToken = await Utility.getRecaptchaResponseToken();
-    // } catch (err) {
-    //   return Promise.reject(err);
-    // }
+    if (!settings.testMode) {
+      if (tokenBank.length) {
+        recaptchaResponseToken = tokenBank[tokenBank.length - 1]["token"];
+        ProcessLogger.log(
+          ProcessLogger.LogType.Info,
+          "Token: " + recaptchaResponseToken
+        );
+      } else {
+        return Promise.reject(
+          "No ReCAPTCHA token found! Did you fill out recaptchas? Keep in mind: ReCAPTCHA Tokens expire after around 1.5 minutes!"
+        );
+      }
+    }
     await this.page.waitForSelector("#mobile_checkout_form");
     await this.page.evaluate(
       (profile, recaptchaResponseToken) => {
@@ -291,9 +303,9 @@ export class Supreme extends PupBrowser {
           document.querySelector("input[name='order[terms]']")
         )).value = "1";
         (<HTMLInputElement>document.getElementById("order_terms")).value = "1";
-        // (<HTMLInputElement>(
-        //   document.getElementById("g-recaptcha-response")
-        // )).value = recaptchaResponseToken;
+        (<HTMLInputElement>(
+          document.getElementById("g-recaptcha-response")
+        )).value = recaptchaResponseToken;
       },
       JSON.parse(JSON.stringify(profile)),
       recaptchaResponseToken
@@ -315,7 +327,7 @@ export class Supreme extends PupBrowser {
       }
     }
     await this.delay(settings.delay, runtimeTimer);
-    if (!settings["testMode"]) {
+    if (!settings.testMode) {
       await this.page.click("#submit_button");
     }
   }

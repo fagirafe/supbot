@@ -18,24 +18,6 @@ export namespace Utils {
     }
   }
 
-  export function getRecaptchaResponseToken(): Promise<string> {
-    return new Promise((resolve, reject) => {
-      request("http://localhost:3001/fetch", (err, res, body) => {
-        if (err) {
-          reject(err);
-        } else if (res && res.statusCode == 200) {
-          let data = JSON.parse(body);
-          if (data.length) {
-            let token = data[data.length - 1]["token"];
-            resolve(token);
-          } else {
-            reject("No recaptcha response token!");
-          }
-        }
-      });
-    });
-  }
-
   export function createTimestamp(): string {
     let current = new Date().getTime();
     let hours: number = Math.floor(

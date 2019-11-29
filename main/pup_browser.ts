@@ -7,13 +7,10 @@ export class PupBrowser {
   protected pieBrowser: puppeteer.Browser;
   protected page: puppeteer.Page;
   protected window: BrowserWindow;
-  protected baseUrl: string;
+  protected baseUrl: string = "https://www.supremenewyork.com/";
 
-  constructor(pieBrowser: puppeteer.Browser, baseUrl: string) {
+  constructor(pieBrowser: puppeteer.Browser) {
     this.pieBrowser = pieBrowser;
-    this.page = null;
-    this.window = null;
-    this.baseUrl = baseUrl;
   }
 
   public async init(): Promise<void> {

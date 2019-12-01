@@ -9,6 +9,7 @@
     size="large"
     class="button-padding"
     routerLink="/add-item"
+    [disabled]="itemsCount == 1"
   ></sup-button>
   <sup-button
     label="next"

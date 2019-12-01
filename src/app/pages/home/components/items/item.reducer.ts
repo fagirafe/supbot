@@ -9,18 +9,8 @@ export const itemAdapter = createEntityAdapter<Item>();
 export interface State extends EntityState<Item> {}
 
 const defaultItems = {
-  ids: ["test"],
-  entities: {
-    test: {
-      id: "test",
-      category: "Sweatshirts",
-      keywords: "Mountain Crewneck",
-      style: "Ash Grey",
-      size: "Large",
-      styleAlternative: "Ash Grey",
-      sizeAlternative: "XLarge"
-    }
-  }
+  ids: [],
+  entities: {}
 };
 
 export const initialState: State = itemAdapter.getInitialState(defaultItems);

@@ -1,3 +1,7 @@
-<button class="{{ size }} {{ color }}" (click)="onClickEvent.emit($event)">
+<button
+  *ngIf="!disabled"
+  class="{{ size }} {{ color }}"
+  (click)="onClickEvent.emit($event)"
+>
   {{ label }}
 </button>

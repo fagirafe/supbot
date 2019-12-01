@@ -62,7 +62,7 @@ export default class Main {
     }
   }
 
-  static main(
+  public static main(
     app: Electron.App,
     browserWindow: typeof BrowserWindow,
     serve: boolean

@@ -5,6 +5,7 @@ import * as url from "url";
 
 import { BrowserWindow, app, ipcMain, screen, shell } from "electron";
 
+import AutoUpdater from "./main/auto_updater";
 import { Bot } from "./main/bot";
 import Main from "./main/electron_main";
 import { ProcessLogger } from "./main/process_logger";
@@ -22,7 +23,7 @@ serve = args.some(val => val === "--serve");
   pieBrowser = await pie.connect(app, puppeteer, 3002);
 })();
 
-// updater.init();
+AutoUpdater.init();
 
 Main.main(app, BrowserWindow, serve);
 

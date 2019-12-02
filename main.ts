@@ -58,14 +58,27 @@ ipcMain.handle("prepare", async (event, arg) => {
 });
 
 ipcMain.handle("cancel", async (event, arg) => {
-  console.log("Canceling...");
-  await Bot.closeWindows();
-  return Promise.resolve();
+  console.log("Cancelling...");
+  try {
+    await Bot.closeWindows();
+  } catch (err) {
+    // catch err
+  } finally {
+    console.log("Cancelled!");
+    return Promise.resolve();
+  }
 });
 
 ipcMain.handle("stop", async (event, arg) => {
   console.log("Stopping...");
-  return Promise.resolve();
+  try {
+    await Bot.closeWindows();
+  } catch (err) {
+    // catch err
+  } finally {
+    console.log("Stopped!");
+    return Promise.resolve();
+  }
 });
 
 ipcMain.on("quit", (event, arg) => {

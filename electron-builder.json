@@ -24,7 +24,7 @@
   ],
   "win": {
     "icon": "dist",
-    "target": ["portable", "squirrel"]
+    "target": ["squirrel"]
   },
   "mac": {
     "icon": "dist",

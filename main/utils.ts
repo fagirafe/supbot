@@ -1,5 +1,7 @@
 import * as request from "request";
 
+import { CustomError } from "ts-custom-error";
+
 export namespace Utils {
   export class RuntimeTimer {
     private readonly NS_PER_SEC: number = 1e9;
@@ -15,6 +17,12 @@ export namespace Utils {
     public getRuntimeMs() {
       const diff = process.hrtime(this.startTime);
       return (diff[0] * this.NS_PER_SEC + diff[1]) * this.MS_PER_NS;
+    }
+  }
+
+  export class CopError extends CustomError {
+    constructor(message?: string) {
+      super(message);
     }
   }
 

@@ -8,9 +8,11 @@ export class PupBrowser {
   protected page: puppeteer.Page;
   protected window: BrowserWindow;
   protected baseUrl: string = "https://www.supremenewyork.com/";
+  protected pageError: boolean;
 
   constructor(pieBrowser: puppeteer.Browser) {
     this.pieBrowser = pieBrowser;
+    this.pageError = false;
   }
 
   public async init(): Promise<void> {

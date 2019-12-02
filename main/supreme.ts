@@ -8,7 +8,6 @@ import { Utils } from "./utils";
 import * as puppeteer from "puppeteer-core";
 import { CaptchaHarvester } from "./captcha_harvester";
 import { ProcessLogger } from "./process_logger";
-import { IfStmt } from "@angular/compiler";
 
 export class Supreme extends PupBrowser {
   constructor(pieBrowser: puppeteer.Browser) {
@@ -49,23 +48,30 @@ export class Supreme extends PupBrowser {
     try {
       stock = await this.getMobileStock();
     } catch (error) {
-      return Promise.reject("Could not get stock: " + error);
+      return Promise.reject(
+        new Utils.CopError("Could not get stock: " + error)
+      );
     }
     let categories: object = stock["products_and_categories"];
     for (let categoryKey in categories) {
       if (categoryKey == productToSearch.category) {
         for (let product of categories[categoryKey]) {
           let stockProductName: string = product["name"];
+          stockProductName = stockProductName.toLowerCase();
           if (stockProductName.charAt(stockProductName.length - 1) == " ") {
             stockProductName = stockProductName.slice(0, -1);
           }
-          if (stockProductName.includes(productToSearch.keywords)) {
+          if (
+            stockProductName.includes(productToSearch.keywords.toLowerCase())
+          ) {
             return Promise.resolve(product);
           }
         }
       }
     }
-    return Promise.reject("Could not find product by keywords!");
+    return Promise.reject(
+      new Utils.CopError("Could not find product by keywords!")
+    );
   }
 
   public async getProduct(id: string): Promise<any> {
@@ -100,7 +106,9 @@ export class Supreme extends PupBrowser {
     let productDetails = await this.getProduct(id);
     let productStyles = productDetails["styles"];
     for (let productStyle of productStyles) {
-      if (productStyle["name"].includes(product.style)) {
+      let stockProductStyle: string = productStyle["name"];
+      stockProductStyle = stockProductStyle.toLowerCase();
+      if (stockProductStyle.includes(product.style.toLowerCase())) {
         let productSizes = productStyle["sizes"];
         if (product.size == "None") {
           if (productSizes[0]["name"] == "N/A") {

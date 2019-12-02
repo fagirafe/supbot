@@ -42,10 +42,13 @@ async function cop(
     runtimeTimer.start();
     await supreme.addProductToCart(productState);
   } catch (err) {
-    setTimeout(() => {
-      ProcessLogger.log(ProcessLogger.LogType.Info, err);
-      cop(supreme, runtimeTimer, product, profile, settings);
-    }, 200);
+    if (err instanceof Utils.CopError) {
+      setTimeout(() => {
+        ProcessLogger.log(ProcessLogger.LogType.Info, err);
+        cop(supreme, runtimeTimer, product, profile, settings);
+      }, 200);
+    }
+    console.log(err);
   }
   try {
     await supreme.checkout(profile, settings, runtimeTimer);
@@ -83,7 +86,10 @@ export namespace Bot {
 
   export async function closeWindows() {
     if (supreme) {
-      supreme.close();
+      await supreme.close();
+    }
+    if (captchaHarvester) {
+      await captchaHarvester.close();
     }
   }
 }

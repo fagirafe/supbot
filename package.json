@@ -17,7 +17,7 @@
   "main": "./dist-main/main.js",
   "private": true,
   "updater": {
-    "url": "https://github.com/blaueeiner/supbot/updates.json"
+    "url": "https://github.com/blaueeiner/supbot/blob/master/updates.json"
   },
   "repository": {
     "type": "git",

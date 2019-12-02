@@ -15,6 +15,8 @@ if (!app.requestSingleInstanceLock()) {
   app.quit();
 }
 
+AutoUpdater.init();
+
 let serve: boolean, pieBrowser: puppeteer.Browser;
 const args = process.argv.slice(1);
 serve = args.some(val => val === "--serve");
@@ -22,8 +24,6 @@ serve = args.some(val => val === "--serve");
 (async () => {
   pieBrowser = await pie.connect(app, puppeteer, 3002);
 })();
-
-AutoUpdater.init();
 
 Main.main(app, BrowserWindow, serve);
 

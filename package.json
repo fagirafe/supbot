@@ -16,9 +16,6 @@
   ],
   "main": "./dist-main/main.js",
   "private": true,
-  "updater": {
-    "url": "https://github.com/blaueeiner/supbot/blob/master/updates.json"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/blaueeiner/supbot.git"
@@ -42,9 +39,7 @@
     "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts",
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "lint": "ng lint",
-    "main-dev": "cross-env TS_NODE_PROJECT='./tsconfig-serve.json' ts-node-dev  --inspect --respawn ./main/ main/index.ts",
-    "publish": "publish -p ./release",
-    "release:windows": "npm run electron:windows && npm run publish"
+    "main-dev": "cross-env TS_NODE_PROJECT='./tsconfig-serve.json' ts-node-dev  --inspect --respawn ./main/ main/index.ts"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "8.2.0",
@@ -80,7 +75,6 @@
     "electron-builder": "21.2.0",
     "electron-builder-squirrel-windows": "^22.2.0",
     "electron-reload": "1.5.0",
-    "electron-simple-publisher": "^0.6.2",
     "jasmine-core": "3.4.0",
     "jasmine-spec-reporter": "4.2.1",
     "karma": "4.2.0",
@@ -105,7 +99,7 @@
     "node": ">=10.9.0"
   },
   "dependencies": {
-    "electron-simple-updater": "^1.5.0",
+    "electron-squirrel-startup": "^1.0.0",
     "puppeteer-core": "^2.0.0",
     "puppeteer-in-electron": "^1.0.7",
     "request": "^2.88.0",

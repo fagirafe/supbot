@@ -1,5 +1,3 @@
-import * as request from "request";
-
 import { CustomError } from "ts-custom-error";
 
 export namespace Utils {

@@ -1,8 +1,0 @@
-{
-  "transport": {
-    "module": "github",
-    "token": "c1a53f93fb2469ddbb3b72e22d384fd38da179fd"
-  },
-  "fields": {},
-  "except": ["prod-v0.5.0"]
-}

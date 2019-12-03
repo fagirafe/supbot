@@ -1,40 +1,43 @@
-import * as updater from "electron-simple-updater";
+import { FeedURLOptions, MessageBoxOptions, autoUpdater } from "electron";
 
 import { dialog } from "electron";
+import { version } from "../package.json";
 
 export default class AutoUpdater {
-  private static onUpdateDownloading(meta) {
-    const dialogOpts = {
-      type: "info",
-      buttons: ["Restart", "Later"],
-      title: "Application Update",
-      message: "Version " + meta.version,
-      detail: "A new version is downloading in the background."
-    };
+  private static FEED_URL_OPTIONS: FeedURLOptions = {
+    url:
+      "https://api.update.rocks/update/github.com/blaueeiner/supbot/stable/" +
+      process.platform +
+      "/" +
+      version
+  };
 
-    dialog.showMessageBox(dialogOpts);
-  }
-  private static onUpdateDownloaded(meta) {
-    const dialogOpts = {
-      type: "info",
-      buttons: ["Restart", "Later"],
-      title: "Application Update",
-      message: "Version " + meta.version,
-      detail: "A new version has been downloaded. Restart and install now?"
+  private static onUpdateDownloaded(event, releaseNotes, releaseName) {
+    const dialogOpts: MessageBoxOptions = {
+      type: "question",
+      buttons: ["Update", "Later"],
+      defaultId: 0,
+      title: "Update available",
+      message: `Version ${releaseName} is available, do you want to install it now?`
     };
 
     dialog.showMessageBox(dialogOpts).then(returnValue => {
-      if (returnValue.response === 0) updater.quitAndInstall();
+      if (returnValue.response === 0) autoUpdater.quitAndInstall();
     });
   }
   private static onUpdateError(err) {
+    console.log(err);
     dialog.showErrorBox("Update error", err);
   }
 
   public static init() {
-    updater.init();
-    updater.on("update-downloading", AutoUpdater.onUpdateDownloading);
-    updater.on("update-downloaded", AutoUpdater.onUpdateDownloaded);
-    updater.on("error", AutoUpdater.onUpdateError);
+    if (process.platform === "linux") {
+      console.log("Auto updates not available on linux");
+    } else {
+      autoUpdater.on("error", AutoUpdater.onUpdateError);
+      autoUpdater.on("update-downloaded", AutoUpdater.onUpdateDownloaded);
+      autoUpdater.setFeedURL(AutoUpdater.FEED_URL_OPTIONS);
+      autoUpdater.checkForUpdates();
+    }
   }
 }

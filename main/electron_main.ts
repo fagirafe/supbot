@@ -1,7 +1,7 @@
 import * as path from "path";
 import * as url from "url";
 
-import AutoUpdater from "./auto_updater";
+import AppUpdater from "./app_updater";
 import { BrowserWindow } from "electron";
 
 export default class Main {
@@ -37,18 +37,8 @@ export default class Main {
         })
       );
       Main.mainWindow.setAutoHideMenuBar(true);
-      if (require("electron-squirrel-startup")) {
-        Main.application.quit();
-        process.exit(0);
-      }
-      if (process.platform === "win32") {
-        var cmd = process.argv[1];
-        if (cmd === "--squirrel-firstrun") {
-          return;
-        }
-      }
       Main.mainWindow.webContents.once("did-frame-finish-load", event => {
-        AutoUpdater.init();
+        AppUpdater.init();
       });
     }
     Main.mainWindow.on("closed", Main.onClose);

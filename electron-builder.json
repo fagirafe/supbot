@@ -24,14 +24,20 @@
   ],
   "win": {
     "icon": "dist",
-    "target": ["squirrel"]
+    "target": ["nsis"],
+    "publish": ["github"]
+  },
+  "nsis": {
+    "createDesktopShortcut": "always"
   },
   "mac": {
     "icon": "dist",
-    "target": ["dmg"]
+    "target": ["dmg"],
+    "publish": ["github"]
   },
   "linux": {
     "icon": "dist",
-    "target": ["AppImage"]
+    "target": ["AppImage"],
+    "publish": ["github"]
   }
 }

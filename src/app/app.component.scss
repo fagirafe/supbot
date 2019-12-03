@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 50px;
   #logo {
     text-align: center;
     background-color: $color-red;
@@ -21,7 +22,10 @@
   }
   #time {
     margin-top: 15px;
-    margin-bottom: 50px;
+  }
+  #update-status {
+    position: relative;
+    top: 20px;
   }
 }
 

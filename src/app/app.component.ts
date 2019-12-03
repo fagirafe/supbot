@@ -15,6 +15,8 @@ import { version } from "../../package.json";
 export class AppComponent {
   public showNav: boolean = true;
   public version: string = version;
+  public updateStatus: string = "";
+  private updateLogListener;
 
   constructor(
     public electronService: ElectronService,
@@ -29,6 +31,12 @@ export class AppComponent {
       console.log("Mode electron");
       console.log("Electron ipcRenderer", electronService.ipcRenderer);
       console.log("NodeJS childProcess", electronService.childProcess);
+      this.updateLogListener = this.electronService.ipcRenderer.on(
+        "update-log",
+        (event, message) => {
+          this.updateStatus = message;
+        }
+      );
     } else {
       console.log("Mode web");
     }

@@ -39,7 +39,8 @@
     "e2e": "npm run build:prod && mocha --timeout 300000 --require ts-node/register e2e/**/*.spec.ts",
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "lint": "ng lint",
-    "main-dev": "cross-env TS_NODE_PROJECT='./tsconfig-serve.json' ts-node-dev  --inspect --respawn ./main/ main/index.ts"
+    "main-dev": "cross-env TS_NODE_PROJECT='./tsconfig-serve.json' ts-node-dev  --inspect --respawn ./main/ main/index.ts",
+    "publish": "electron-builder --publish"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "8.2.0",
@@ -99,7 +100,8 @@
     "node": ">=10.9.0"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0",
+    "electron-log": "^3.0.9",
+    "electron-updater": "^4.2.0",
     "puppeteer-core": "^2.0.0",
     "puppeteer-in-electron": "^1.0.7",
     "request": "^2.88.0",

@@ -40,7 +40,7 @@
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "lint": "ng lint",
     "main-dev": "cross-env TS_NODE_PROJECT='./tsconfig-serve.json' ts-node-dev  --inspect --respawn ./main/ main/index.ts",
-    "publish": "electron-builder --publish"
+    "deploy": "npm run electron:windows -- --publish always"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "8.2.0",

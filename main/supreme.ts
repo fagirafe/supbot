@@ -324,13 +324,15 @@ export class Supreme extends PupBrowser {
       });
       totalString = totalString.replace("€", "");
       let total = parseInt(totalString);
-      if (total > settings["priceLimit"]) {
-        Promise.reject(
-          "Order total of " +
-            total +
-            "€ is higher than price limit of " +
-            settings["priceLimit"] +
-            "€"
+      if (total > settings.priceLimit) {
+        return Promise.reject(
+          new Utils.CopError(
+            "Order total of " +
+              total +
+              "€ is higher than price limit of " +
+              settings.priceLimit +
+              "€"
+          )
         );
       }
     }

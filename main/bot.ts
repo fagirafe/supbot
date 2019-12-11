@@ -53,6 +53,10 @@ async function cop(
   try {
     await supreme.checkout(profile, settings, runtimeTimer);
   } catch (err) {
+    if (err instanceof Utils.CopError) {
+      ProcessLogger.log(ProcessLogger.LogType.Error, err.message);
+      return Promise.resolve();
+    }
     return Promise.reject(err);
   }
 }

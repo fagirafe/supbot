@@ -110,7 +110,7 @@ export class Supreme extends PupBrowser {
       stockProductStyle = stockProductStyle.toLowerCase();
       if (stockProductStyle.includes(product.style.toLowerCase())) {
         let productSizes = productStyle["sizes"];
-        if (product.size == "None") {
+        if (product.size == "N/A") {
           if (productSizes[0]["name"] == "N/A") {
             if (productSizes[0]["stock_level"] == 1) {
               return {
@@ -160,7 +160,7 @@ export class Supreme extends PupBrowser {
             }
           }
         }
-        if (product.sizeAlternative != "None") {
+        if (product.sizeAlternative != "N/A") {
           for (let productSize of productSizes) {
             let stockProductSize = productSize["name"];
             if (stockProductSize.charAt(stockProductSize.length - 1) == " ") {

@@ -1,10 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import * as actions from "../home/components/items/item.actions";
 import * as fromItem from "../home/components/items/item.reducer";
-import { Store } from "@ngrx/store";
+
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+
 import { Item } from "../../shared/models/item";
 import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
 import { v4 as uuid } from "uuid";
 
 @Component({
@@ -26,9 +28,9 @@ export class AddItemComponent implements OnInit {
       category: ["New", [Validators.required]],
       keywords: ["", [Validators.required]],
       style: ["", [Validators.required]],
-      size: ["", [Validators.required]],
+      size: ["N/A", [Validators.required]],
       styleAlternative: ["", []],
-      sizeAlternative: ["", []]
+      sizeAlternative: ["N/A", []]
     });
   }
 

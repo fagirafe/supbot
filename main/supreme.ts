@@ -353,7 +353,7 @@ export class Supreme extends PupBrowser {
           resolve();
         } else {
           setTimeout(() => {
-            delay();
+            return delay();
           }, 50);
         }
       })();

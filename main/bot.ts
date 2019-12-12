@@ -37,18 +37,19 @@ async function cop(
       !productState.stock_level ||
       productState.stock_level == null
     ) {
-      throw new Error(productState["message"]);
+      throw new Utils.CopError(productState.message);
     }
     runtimeTimer.start();
     await supreme.addProductToCart(productState);
   } catch (err) {
     if (err instanceof Utils.CopError) {
-      setTimeout(() => {
-        ProcessLogger.log(ProcessLogger.LogType.Info, err);
-        cop(supreme, runtimeTimer, product, profile, settings);
+      setTimeout(async () => {
+        ProcessLogger.log(ProcessLogger.LogType.Info, err.message);
+        return await cop(supreme, runtimeTimer, product, profile, settings);
       }, 200);
+    } else {
+      console.log(err);
     }
-    console.log(err);
   }
   try {
     await supreme.checkout(profile, settings, runtimeTimer);
